@@ -1,0 +1,138 @@
+.shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-16);
+  background: var(--wine-800);
+  color: var(--cream-50);
+}
+
+.eyebrow {
+  margin: 0 0 var(--space-3);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-600);
+}
+
+.brand .eyebrow {
+  color: var(--blush-200);
+}
+
+h1 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.la {
+  font-size: 40px;
+  letter-spacing: 0.08em;
+}
+
+.script {
+  font-family: var(--font-script);
+  font-size: 44px;
+  color: var(--blush-200);
+}
+
+.caps {
+  font-size: 32px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.tagline {
+  margin: var(--space-8) 0 0;
+  color: var(--blush-100);
+  font-style: italic;
+}
+
+.card {
+  align-self: center;
+  margin: var(--space-8);
+  padding: var(--space-8);
+  background: var(--cream-100);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-soft);
+}
+
+h2 {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.card p {
+  color: var(--ink-600);
+}
+
+code {
+  padding: 2px 4px;
+  border-radius: var(--radius-xs);
+  background: var(--cream-200);
+  color: var(--ink-900);
+  font-size: 13px;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--cream-50);
+  font-size: 13px;
+  color: var(--ink-900);
+}
+
+.status .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink-400);
+}
+
+.status--online .dot {
+  background: var(--success);
+}
+
+.status--offline .dot {
+  background: var(--danger);
+}
+
+.hint {
+  margin-top: var(--space-4);
+  font-size: 13px;
+}
+
+@media (max-width: 860px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .brand {
+    min-height: 40vh;
+    padding: var(--space-8);
+  }
+
+  .card {
+    margin: var(--space-4);
+  }
+}

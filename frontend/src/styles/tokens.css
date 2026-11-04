@@ -1,0 +1,41 @@
+:root {
+  --wine-900: #4a0707;
+  --wine-800: #5a0a09;
+  --wine-700: #6e0f0d;
+  --wine-600: #8c2a28;
+  --blush-400: #dca396;
+  --blush-300: #e9b9ae;
+  --blush-200: #f3cfc5;
+  --blush-100: #f9e7e0;
+  --cream-50: #fbf6f1;
+  --cream-100: #f5ece4;
+  --cream-200: #efe1d8;
+  --ink-900: #2a1b18;
+  --ink-600: #6b5651;
+  --ink-400: #9a857f;
+  --line: #e6d8cf;
+  --line-strong: #d8c6bb;
+  --success: #4f7a5b;
+  --warning: #b8863b;
+  --danger: #a32626;
+
+  --font-display: 'Bodoni Moda', Didot, 'Playfair Display', Georgia, serif;
+  --font-script: 'Parisienne', 'Snell Roundhand', cursive;
+  --font-ui: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-pill: 999px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --shadow-soft: 0 1px 2px rgb(42 27 24 / 5%);
+}

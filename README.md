@@ -4,7 +4,7 @@ Internal inventory, margin, and sales tracker for **La Caribeña Encajes**, a Do
 lingerie, pajama, and bikini boutique. Spanish-first, phone-first, built for a
 non-technical owner.
 
-- **Repository state:** design complete, implementation not started.
+- **Repository state:** scaffolded; frontend, API, and database boot locally.
 - **Sources of truth:** `DESIGN.md` (design system v1) and `design.pen` (high-fidelity UI).
 - **Last reviewed:** 2026-11-04.
 
@@ -17,15 +17,15 @@ non-technical owner.
 | Brand foundation and design system | Complete | `DESIGN.md`, v1 dated 2026-11-03 |
 | High-fidelity UI design | Complete | `design.pen`, 14 screens, 15 reusable component groups |
 | Scope reconciliation | Decision needed | Design file covers more modules than the v1 doc |
-| Frontend (Preact + TypeScript) | Not started | No application code in the repository |
-| Backend (Python + FastAPI + SQLAlchemy) | Not started | No application code in the repository |
-| Database (Postgres) | Not started | No schema, migrations, or seed data |
-| Docker and Docker Compose | Not started | `docker-compose.yml` is planned, not present |
+| Frontend (Preact + TypeScript) | Scaffolded | Vite app serves a branded shell and API status |
+| Backend (Python + FastAPI + SQLAlchemy) | Scaffolded | Health endpoint, config, models, Alembic |
+| Database (Postgres) | Scaffolded | One migration applied; four categories seeded |
+| Docker and Docker Compose | Complete | `docker-compose.yml` runs Postgres only |
 | Logo production assets | Pending | Export called out as pending in `DESIGN.md` |
-| Tests | Not started | No test tooling configured |
+| Tests | Started | Backend smoke tests; no frontend tests yet |
 
-**Overall phase:** pre-implementation. The interface is fully specified and drawn; the
-application has not been scaffolded.
+**Overall phase:** foundation built. Tooling, database, and a thin vertical slice work;
+product features have not been implemented.
 
 ---
 
@@ -78,67 +78,75 @@ well beyond the v1 document.
 | Layer | Technology | Notes |
 | --- | --- | --- |
 | Frontend | Preact + TypeScript | Chosen for this build; `DESIGN.md` §12 suggests React |
-| Build tool | Vite | Assumed for the Preact app; not yet configured |
-| Styling | CSS custom properties | Tokens exported 1:1 from `DESIGN.md` into `:root` |
+| Build tool | Vite | Configured, with `/api` proxied to port 8000 |
+| Styling | CSS custom properties | `DESIGN.md` tokens exported into `tokens.css` |
 | Backend | Python + FastAPI | REST API, OpenAPI docs at `/docs` |
-| ORM / migrations | SQLAlchemy + Alembic | Alembic not yet configured |
-| Database | PostgreSQL | Run in Docker |
-| Local runtime | Docker Compose | Single command for db, api, and web |
+| Dependency manager | uv | Backend only; frontend uses npm |
+| ORM / migrations | SQLAlchemy + Alembic | Configured; initial migration applied |
+| Database | PostgreSQL | Run in Docker via Compose |
+| Local runtime | Make + Docker Compose | Compose runs the database; Make runs API and web |
 | Currency | `RD$`, Dominican formatting | Money stored as `NUMERIC(12,2)` |
 
-### Planned service topology
+### Service topology
 
 | Service | Image / build | Port | Purpose |
 | --- | --- | --- | --- |
-| `db` | `postgres:16` | 5432 | Persistent Postgres volume |
-| `api` | `backend/Dockerfile` | 8000 | FastAPI application |
-| `web` | `frontend/Dockerfile` | 5173 | Preact development server |
+| `db` | `postgres:16-alpine` | 5432 | Persistent Postgres volume |
 
-A `docker-compose.yml` will wire these three services with a shared network, a named
-database volume, and an `.env`-driven configuration. It does not exist yet.
+`docker-compose.yml` provisions only Postgres. FastAPI and Vite run on the host through
+`uv` and npm, which keeps hot reload fast and the Compose file small.
 
 ---
 
-## 4. Planned repository layout
-
-None of the application paths below exist yet; this is the target structure.
+## 4. Repository layout
 
 ```text
 lacaribenaencajes/
 ├── DESIGN.md
+├── Makefile
 ├── README.md
 ├── design.pen
-├── docker-compose.yml            # planned
-├── .env.example                  # planned
+├── docker-compose.yml
+├── .env.example
 ├── backend/
-│   ├── Dockerfile                # planned
-│   ├── pyproject.toml            # planned
-│   ├── alembic/                  # planned
-│   └── app/
-│       ├── main.py               # planned
-│       ├── core/                 # config, database session
-│       ├── models/               # SQLAlchemy models
-│       ├── schemas/              # Pydantic schemas
-│       └── api/                  # routers
+│   ├── pyproject.toml
+│   ├── uv.lock
+│   ├── alembic.ini
+│   ├── alembic/
+│   │   ├── env.py
+│   │   └── versions/
+│   ├── src/lacaribena_api/
+│   │   ├── main.py
+│   │   ├── cli.py
+│   │   ├── seed.py
+│   │   ├── api/routes/health.py
+│   │   ├── core/config.py
+│   │   ├── db/base.py
+│   │   ├── db/session.py
+│   │   └── models/
+│   └── tests/
 └── frontend/
-    ├── Dockerfile                # planned
-    ├── package.json              # planned
+    ├── package.json
+    ├── vite.config.ts
     └── src/
-        ├── main.tsx              # planned
-        ├── components/           # buttons, table, chips, modal
-        ├── screens/              # Productos, Dashboard, Ventas, Operativo
-        ├── lib/money.ts          # single currency + margin formatter
-        └── styles/tokens.css     # DESIGN.md tokens
+        ├── main.tsx
+        ├── app.tsx
+        ├── app.css
+        ├── index.css
+        └── styles/tokens.css
 ```
+
+Feature folders for product screens, the `money.ts` utility, and Pydantic schemas are
+not created yet.
 
 ---
 
-## 5. Planned data model
+## 5. Data model
 
 | Table | Key fields | Status |
 | --- | --- | --- |
-| `categories` | `id`, `name`, `slug`, `color`, timestamps | Core v1 |
-| `products` | `id`, `name`, `category_id`, `price`, `cost`, timestamps | Core v1 |
+| `categories` | `id`, `name`, `slug`, `color`, timestamps | Migrated and seeded |
+| `products` | `id`, `name`, `category_id`, `price`, `cost`, timestamps | Migrated; no endpoints yet |
 | `orders` | `id`, `customer_name`, `payment_method`, `status`, `total`, `sold_at` | Expanded scope |
 | `order_items` | `id`, `order_id`, `product_id`, `quantity`, `unit_price`, `unit_cost` | Expanded scope |
 | `inventory_movements` | `id`, `product_id`, `delta`, `reason`, `created_at` | Expanded scope |
@@ -150,19 +158,21 @@ Rules:
   never stored as editable product fields.
 - Money uses `NUMERIC(12,2)`, never floating point.
 - Stock, SKU, and supplier stay out of the v1 product table, per `DESIGN.md` §8.
+- Database constraints enforce non-negative `price` and `cost`.
 
-### Planned API surface
+### API surface
 
-| Method | Path | Purpose |
-| --- | --- | --- |
-| `GET` | `/api/health` | Liveness check |
-| `GET` | `/api/categories` | List categories |
-| `POST` | `/api/categories` | Create category |
-| `GET` | `/api/products` | List with search, filter, pagination |
-| `POST` | `/api/products` | Create product |
-| `PATCH` | `/api/products/{id}` | Update product |
-| `DELETE` | `/api/products/{id}` | Delete product |
-| `GET` | `/api/summary` | Active products, inventory value, potential profit |
+| Method | Path | Purpose | Status |
+| --- | --- | --- | --- |
+| `GET` | `/` | Service metadata | Implemented |
+| `GET` | `/api/health` | API and database liveness | Implemented |
+| `GET` | `/api/categories` | List categories | Planned |
+| `POST` | `/api/categories` | Create category | Planned |
+| `GET` | `/api/products` | List with search, filter, pagination | Planned |
+| `POST` | `/api/products` | Create product | Planned |
+| `PATCH` | `/api/products/{id}` | Update product | Planned |
+| `DELETE` | `/api/products/{id}` | Delete product | Planned |
+| `GET` | `/api/summary` | Active products, inventory value, potential profit | Planned |
 
 The remaining dashboard, sales, and operations endpoints depend on the scope decision in
 section 6.
@@ -197,12 +207,13 @@ section 6.
 - [x] Component and screen design (desktop and mobile)
 - [x] Product list specification, including computed margin
 - [ ] Resolve scope and wordmark decisions
-- [ ] Scaffold monorepo (frontend, backend, compose, env example)
-- [ ] Define SQLAlchemy models and initial Alembic migration
-- [ ] Seed the four categories and sample catalog
+- [x] Scaffold monorepo (frontend, backend, compose, env example)
+- [x] Define SQLAlchemy models and initial Alembic migration
+- [x] Seed the four categories
 - [ ] Implement products and categories API with validation
-- [ ] Export design tokens into `tokens.css`
-- [ ] Build app shell, navigation, and responsive layout
+- [x] Export design tokens into `tokens.css`
+- [x] Build app shell and responsive scaffold
+- [ ] Build navigation and responsive layout
 - [ ] Build the product table, search, filters, and pagination
 - [ ] Build create/edit modal with live computed net income
 - [ ] Add optimistic save/delete with undo
@@ -211,7 +222,7 @@ section 6.
 - [ ] Add authentication if it stays in scope
 - [ ] Add dashboard, sales, and operations modules if they stay in scope
 - [ ] Produce logo assets and self-host fonts
-- [ ] Containerize and document one-command startup
+- [ ] Add production container images
 
 ---
 
@@ -233,12 +244,35 @@ section 6.
 
 ## 10. Running the project
 
-No runnable application exists yet. Once scaffolding lands, the intended flow is:
+Requires Docker, Docker Compose, uv, Node.js 20+, and GNU Make.
 
 ```bash
-cp .env.example .env
-docker compose up --build
+make dev
 ```
 
-The web app will be served at `http://localhost:5173`, the API at
-`http://localhost:8000`, and OpenAPI docs at `http://localhost:8000/docs`.
+That single command creates `.env`, installs dependencies, starts Postgres, applies
+migrations, and runs FastAPI and Vite together.
+
+| Command | Purpose |
+| --- | --- |
+| `make dev` | Full stack: database, API, and web app |
+| `make backend` | Database plus FastAPI only |
+| `make frontend` | Vite only (expects the API on port 8000) |
+| `make db-up` | Start Postgres and wait for health |
+| `make db-down` | Stop Postgres |
+| `make db-reset` | Delete the volume, restart, and migrate |
+| `make migrate` | Apply Alembic migrations |
+| `make migration m="message"` | Autogenerate a migration |
+| `make seed` | Insert the four base categories |
+| `make test` | Run backend tests |
+| `make lint` | Ruff plus TypeScript type-check |
+| `make build` | Production build of the frontend |
+
+Local URLs:
+
+- Web: `http://localhost:5173`
+- API: `http://localhost:8000`
+- OpenAPI docs: `http://localhost:8000/docs`
+
+The Vite dev server proxies `/api` to FastAPI, so frontend requests are same-origin in
+development. Configuration comes from `.env`; `.env.example` holds working defaults.
