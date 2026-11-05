@@ -20,7 +20,11 @@ class Category(Base):
     slug: Mapped[str] = mapped_column(String(80), unique=True, index=True)
     color: Mapped[str | None] = mapped_column(String(20))
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now()
+        DateTime(timezone=True), server_default=func.current_timestamp()
     )
 
     products: Mapped[list[Product]] = relationship(back_populates="category")
+
+    @property
+    def product_count(self) -> int:
+        return len(self.products)

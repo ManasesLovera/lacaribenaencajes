@@ -1,6 +1,6 @@
 [project]
 name = "lacaribena-api"
-version = "0.1.0"
+version = "0.2.0"
 description = "FastAPI backend for the La Caribeña Encajes inventory app"
 readme = "README.md"
 authors = [
@@ -9,9 +9,13 @@ authors = [
 requires-python = ">=3.12"
 dependencies = [
     "alembic>=1.20.1",
+    "email-validator>=2.3.0",
     "fastapi>=0.162.0",
     "psycopg[binary]>=3.3.8",
+    "pwdlib[argon2]>=0.3.1",
     "pydantic-settings>=2.16.2",
+    "pyjwt>=2.15.1",
+    "python-multipart>=0.0.33",
     "sqlalchemy>=2.1.8",
     "uvicorn[standard]>=0.54.0",
 ]
@@ -43,3 +47,4 @@ testpaths = ["tests"]
 
 [tool.ruff.lint.per-file-ignores]
 "src/lacaribena_api/api/**/*.py" = ["B008"]
+"src/lacaribena_api/security/auth.py" = ["B008"]

@@ -11,12 +11,17 @@ class Settings(BaseSettings):
     )
 
     app_name: str = "La Caribeña Encajes API"
-    app_version: str = "0.1.0"
+    app_version: str = "0.2.0"
     environment: str = "development"
-    database_url: str = (
-        "postgresql+psycopg://lacaribena:lacaribena@localhost:5432/lacaribena"
-    )
+    database_url: str = "sqlite:///./lacaribena.db"
     cors_origins: str = "http://localhost:5173"
+
+    secret_key: str = "lacaribena-dev-secret-change-in-production"
+    jwt_algorithm: str = "HS256"
+    access_token_expire_minutes: int = 60 * 24 * 7
+
+    seed_email: str = "yesenia@lacaribenaencajes.com"
+    seed_password: str = "lacaribenaencajes"
 
     @property
     def cors_origin_list(self) -> list[str]:

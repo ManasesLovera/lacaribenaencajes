@@ -1,11 +1,11 @@
 SHELL := /bin/bash
 .DEFAULT_GOAL := help
 
-COMPOSE ?= docker compose
 BACKEND := backend
 FRONTEND := frontend
+DB_FILE := $(BACKEND)/lacaribena.db
 
-.PHONY: help install env db-up db-down db-reset db-logs db-shell migrate migration seed backend frontend dev test lint build
+.PHONY: help install env demo migrate migration seed db-reset db-shell backend frontend dev test lint build
 
 help: ## Show available commands
 	@echo "La Caribeña Encajes"
@@ -19,43 +19,34 @@ install: env ## Install backend and frontend dependencies
 	cd $(BACKEND) && uv sync
 	cd $(FRONTEND) && npm install
 
-db-up: env ## Start Postgres and wait until healthy
-	@$(COMPOSE) up -d db
-	@printf "Waiting for Postgres"
-	@until [ "$$(docker inspect -f '{{.State.Health.Status}}' lacaribena-db 2>/dev/null)" = "healthy" ]; do printf "."; sleep 1; done
-	@echo " ready"
+demo: ## Run frontend only with local browser data
+	cd $(FRONTEND) && npm install
+	cd $(FRONTEND) && VITE_DEMO_MODE=true npm run dev -- --host 0.0.0.0
 
-db-down: ## Stop Postgres
-	@$(COMPOSE) down
-
-db-reset: ## Delete the database volume and start fresh
-	@$(COMPOSE) down -v
-	@$(MAKE) db-up
-	@$(MAKE) migrate
-
-db-logs: ## Follow Postgres logs
-	@$(COMPOSE) logs -f db
-
-db-shell: ## Open psql inside the database
-	@$(COMPOSE) exec db sh -c 'psql -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"'
-
-migrate: ## Apply Alembic migrations
+migrate: env ## Apply Alembic migrations to SQLite
 	cd $(BACKEND) && uv run alembic upgrade head
 
 migration: ## Create a migration: make migration m="message"
 	cd $(BACKEND) && uv run alembic revision --autogenerate -m "$(m)"
 
-seed: ## Insert the four base categories
+seed: migrate ## Seed the SQLite database
 	cd $(BACKEND) && uv run python -m lacaribena_api.seed
 
-backend: db-up migrate ## Run FastAPI with a healthy database
+db-reset: ## Delete the SQLite database and rebuild it
+	rm -f $(DB_FILE)
+	@$(MAKE) seed
+
+db-shell: ## Open the SQLite database
+	sqlite3 $(DB_FILE)
+
+backend: seed ## Run FastAPI against SQLite
 	cd $(BACKEND) && uv run uvicorn lacaribena_api.main:app --reload --host 0.0.0.0 --port 8000
 
 frontend: ## Run the Vite dev server
 	cd $(FRONTEND) && npm run dev -- --host 0.0.0.0
 
-dev: install db-up migrate ## Run database, API, and web app together
-	@echo "API: http://localhost:8000/docs   Web: http://localhost:5173"
+dev: install seed ## Run the full stack: SQLite API + frontend
+	@echo "Full stack: http://localhost:5173   API docs: http://localhost:8000/docs"
 	@set -e; \
 	trap 'kill $$BACK_PID $$FRONT_PID 2>/dev/null || true' INT TERM EXIT; \
 	(cd $(BACKEND) && uv run uvicorn lacaribena_api.main:app --reload --host 0.0.0.0 --port 8000) & BACK_PID=$$!; \

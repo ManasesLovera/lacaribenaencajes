@@ -12,3 +12,8 @@ node_modules/
 dist/
 *.local
 .DS_Store
+
+# SQLite
+*.db
+*.db-journal
+*.sqlite3

@@ -1,61 +1,128 @@
 import { useEffect, useState } from 'preact/hooks'
+import { Shell } from './components/Shell'
+import { DataProvider } from './data/DataContext'
+import { api } from './lib/api'
+import {
+  clearDemoSession,
+  clearToken,
+  DEMO_EMAIL,
+  DEMO_PASSWORD,
+  loadDemoSession,
+  loadToken,
+  saveDemoSession,
+  saveToken,
+  type Session,
+} from './lib/auth'
+import { DEMO_MODE } from './lib/mode'
+import { navigate, useRoute } from './lib/router'
+import { Categories } from './pages/Categories'
+import { Dashboard } from './pages/Dashboard'
+import { Login } from './pages/Login'
+import { Operations } from './pages/Operations'
+import { Products } from './pages/Products'
+import { Sales } from './pages/Sales'
+import { Settings } from './pages/Settings'
 import './app.css'
 
-type ApiState = 'checking' | 'online' | 'offline'
+function Page({ path, query }: { path: string; query: URLSearchParams }) {
+  switch (path) {
+    case '/productos':
+      return <Products query={query} />
+    case '/categorias':
+      return <Categories />
+    case '/ventas':
+      return <Sales />
+    case '/operativo':
+      return <Operations />
+    case '/ajustes':
+      return <Settings />
+    case '/dashboard':
+    default:
+      return <Dashboard />
+  }
+}
 
 export function App() {
-  const [apiState, setApiState] = useState<ApiState>('checking')
+  const [session, setSession] = useState<Session | null>(() =>
+    DEMO_MODE ? loadDemoSession() : null,
+  )
+  const [checking, setChecking] = useState(
+    () => !DEMO_MODE && Boolean(loadToken()),
+  )
+  const route = useRoute()
 
   useEffect(() => {
-    let cancelled = false
-
-    fetch('/api/health')
-      .then((response) => {
-        if (!response.ok) throw new Error('API unavailable')
-        return response.json()
-      })
-      .then(() => {
-        if (!cancelled) setApiState('online')
-      })
-      .catch(() => {
-        if (!cancelled) setApiState('offline')
-      })
-
-    return () => {
-      cancelled = true
+    if (DEMO_MODE) {
+      setChecking(false)
+      return
     }
+    if (!loadToken()) {
+      setChecking(false)
+      return
+    }
+    api
+      .me()
+      .then((user) => setSession({ email: user.email, name: user.name }))
+      .catch(() => clearToken())
+      .finally(() => setChecking(false))
   }, [])
 
-  return (
-    <main class="shell">
-      <section class="brand">
-        <p class="eyebrow">Inventario</p>
-        <h1>
-          <span class="la">LA</span>
-          <span class="script">Caribeña</span>
-          <span class="caps">ENCAJES</span>
-        </h1>
-        <p class="tagline">Cada encaje, en su lugar.</p>
-      </section>
+  useEffect(() => {
+    const onExpired = () => {
+      clearToken()
+      setSession(null)
+    }
+    window.addEventListener('lacaribena:auth-expired', onExpired)
+    return () => window.removeEventListener('lacaribena:auth-expired', onExpired)
+  }, [])
 
-      <section class="card">
-        <p class="eyebrow">Estado del proyecto</p>
-        <h2>Base lista para construir</h2>
-        <p>
-          Preact, FastAPI y Postgres están conectados. El siguiente paso es el catálogo de
-          productos descrito en <code>DESIGN.md</code>.
-        </p>
-        <div class={`status status--${apiState}`} role="status">
-          <span class="dot" aria-hidden="true"></span>
-          {apiState === 'checking' && 'Verificando API…'}
-          {apiState === 'online' && 'API y base de datos en línea'}
-          {apiState === 'offline' && 'API fuera de línea · ejecuta make backend'}
-        </div>
-        <p class="hint">
-          Web en <code>:5173</code> · API en <code>:8000</code> · docs en{' '}
-          <a href="http://localhost:8000/docs">/docs</a>
-        </p>
-      </section>
-    </main>
+  if (checking) {
+    return (
+      <div class="boot">
+        <span class="boot__mark" aria-hidden="true">✦</span>
+        <p>Abriendo el atelier…</p>
+      </div>
+    )
+  }
+
+  if (!session) {
+    return (
+      <Login
+        onLogin={async (email, password, remember) => {
+          if (DEMO_MODE) {
+            if (email.toLowerCase() !== DEMO_EMAIL || password !== DEMO_PASSWORD) {
+              throw new Error('Correo o contraseña incorrectos')
+            }
+            const demoSession = { email: DEMO_EMAIL, name: 'Yesenia Castillo' }
+            saveDemoSession(demoSession)
+            setSession(demoSession)
+            navigate('/dashboard')
+            return
+          }
+          const result = await api.login(email, password)
+          saveToken(result.access_token, remember)
+          setSession({ email: result.user.email, name: result.user.name })
+          navigate('/dashboard')
+        }}
+      />
+    )
+  }
+
+  const logout = () => {
+    if (DEMO_MODE) {
+      clearDemoSession()
+    } else {
+      clearToken()
+    }
+    setSession(null)
+    navigate('/dashboard')
+  }
+
+  return (
+    <DataProvider onLogout={logout}>
+      <Shell path={route.path} onLogout={logout}>
+        <Page path={route.path} query={route.query} />
+      </Shell>
+    </DataProvider>
   )
 }

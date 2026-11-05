@@ -26,7 +26,7 @@ def upgrade() -> None:
     sa.Column('name', sa.String(length=80), nullable=False),
     sa.Column('slug', sa.String(length=80), nullable=False),
     sa.Column('color', sa.String(length=20), nullable=True),
-    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
+    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_categories_name'), 'categories', ['name'], unique=True)
@@ -37,8 +37,8 @@ def upgrade() -> None:
     sa.Column('category_id', sa.Integer(), nullable=False),
     sa.Column('price', sa.Numeric(precision=12, scale=2), nullable=False),
     sa.Column('cost', sa.Numeric(precision=12, scale=2), nullable=False),
-    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
-    sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
+    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=False),
+    sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=False),
     sa.CheckConstraint('cost >= 0', name='ck_products_cost_non_negative'),
     sa.CheckConstraint('price >= 0', name='ck_products_price_non_negative'),
     sa.ForeignKeyConstraint(['category_id'], ['categories.id'], ondelete='RESTRICT'),

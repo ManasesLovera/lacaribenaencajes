@@ -9,6 +9,10 @@ settings = get_settings()
 app = FastAPI(
     title=settings.app_name,
     version=settings.app_version,
+    description=(
+        "API de inventario, ventas y márgenes de La Caribeña Encajes. "
+        "Autenticación con JWT; datos persistidos en SQLite durante el desarrollo."
+    ),
     docs_url="/docs",
     redoc_url="/redoc",
 )
@@ -31,4 +35,5 @@ def root() -> dict[str, str]:
         "version": settings.app_version,
         "docs": "/docs",
         "health": "/api/health",
+        "auth": "/api/auth/login",
     }
