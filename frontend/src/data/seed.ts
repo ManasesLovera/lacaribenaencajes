@@ -171,8 +171,7 @@ function generateOrders(): Order[] {
   }
 
   for (let index = 0; index < 4; index += 1) {
-    const date = new Date(now)
-    date.setHours(9 + index * 2, 5 + index * 3, 0, 0)
+    const date = new Date(now.getTime() - 35 * (index + 1) * 60 * 1000)
     orders.push(randomOrder(rng, number, date))
     number += 1
   }

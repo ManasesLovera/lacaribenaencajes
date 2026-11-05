@@ -40,6 +40,12 @@ type DataValue = {
   addTask: (title: string) => Promise<void>
   saveSettings: (settings: Settings) => Promise<void>
   resetDemo: () => Promise<void>
+  createOrder: (payload: {
+    customerName: string
+    paymentMethod: string
+    status: string
+    items: { productId: string; quantity: number }[]
+  }) => Promise<Order>
 }
 
 const DataContext = createContext<DataValue | null>(null)
@@ -244,6 +250,22 @@ function ApiDataProvider({
       await api.resetDemo()
       await refresh()
     },
+    createOrder: async (payload) => {
+      const created = await api.createOrder({
+        customer_name: payload.customerName,
+        payment_method: payload.paymentMethod,
+        status: payload.status,
+        items: payload.items.map((item) => ({
+          product_id: Number(item.productId),
+          quantity: item.quantity,
+        })),
+      })
+      const mapped = mapOrder(created)
+      setOrders((current) => [mapped, ...current])
+      const productPage = await api.products()
+      setProducts(productPage.items.map(mapProduct))
+      return mapped
+    },
   }
 
   if (loading) {
@@ -314,7 +336,7 @@ function DemoDataProvider({
   const [categories, setCategories] = useState<Category[]>(() =>
     readLocal(DEMO_KEYS.categories, seedCategories),
   )
-  const [orders] = useState<Order[]>(() => readLocal(DEMO_KEYS.orders, seedOrders))
+  const [orders, setOrders] = useState<Order[]>(() => readLocal(DEMO_KEYS.orders, seedOrders))
   const [tasks, setTasks] = useState<Task[]>(() =>
     readLocal(DEMO_KEYS.tasks, seedTasks),
   )
@@ -377,6 +399,54 @@ function DemoDataProvider({
       setCategories(seedCategories)
       setTasks(seedTasks)
       setSettings(seedSettings)
+    },
+    createOrder: async (payload) => {
+      const items = payload.items.map((item) => {
+        const product = products.find((entry) => entry.id === item.productId)
+        if (!product) throw new Error('Producto no encontrado')
+        if (product.stock < item.quantity) {
+          throw new Error(
+            `Stock insuficiente para ${product.name}: quedan ${product.stock} unidades`,
+          )
+        }
+        return {
+          product,
+          quantity: item.quantity,
+          unitPrice: product.price,
+          unitCost: product.cost,
+        }
+      })
+      if (items.length === 0) throw new Error('Añade al menos un producto')
+
+      const total = items.reduce(
+        (sum, item) => sum + item.unitPrice * item.quantity,
+        0,
+      )
+      const order: Order = {
+        id: `order-${Date.now()}`,
+        number: Math.max(1000, ...orders.map((entry) => entry.number)) + 1,
+        customerName: payload.customerName,
+        paymentMethod: payload.paymentMethod as Order['paymentMethod'],
+        status: payload.status as Order['status'],
+        items: items.map((item) => ({
+          productId: item.product.id,
+          quantity: item.quantity,
+          unitPrice: item.unitPrice,
+          unitCost: item.unitCost,
+        })),
+        total,
+        soldAt: new Date().toISOString(),
+      }
+      setOrders((current) => [order, ...current])
+      setProducts((current) =>
+        current.map((product) => {
+          const line = items.find((entry) => entry.product.id === product.id)
+          return line
+            ? { ...product, stock: product.stock - line.quantity }
+            : product
+        }),
+      )
+      return order
     },
   }
 

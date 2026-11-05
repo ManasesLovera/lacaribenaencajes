@@ -76,6 +76,14 @@ def create_order(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"Producto {entry.product_id} no encontrado",
             )
+        if product.stock < entry.quantity:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=(
+                    f"Stock insuficiente para {product.name}: "
+                    f"quedan {product.stock} unidades"
+                ),
+            )
         total += product.price * entry.quantity
         items.append(
             OrderItem(
@@ -97,6 +105,11 @@ def create_order(
         sold_at=payload.sold_at or datetime.now(),
         items=items,
     )
+    for entry in payload.items:
+        product = db.get(Product, entry.product_id)
+        if product:
+            product.stock -= entry.quantity
+
     db.add(order)
     db.commit()
     return get_order(order.id, db=db, _=None)

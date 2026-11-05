@@ -93,6 +93,9 @@ def test_create_order(
     assert order["total"] == 2000.0
     assert order["items"][0]["product_name"] == "Pijama de prueba"
 
+    product = client.get("/api/products/1", headers=auth_headers)
+    assert product.json()["stock"] == 3
+
     orders = client.get("/api/orders", headers=auth_headers)
     assert orders.json()["total"] == 1
 
@@ -124,3 +127,18 @@ def test_reset_demo(
     assert products.json()["total"] == 24
     orders = client.get("/api/orders?limit=1000", headers=auth_headers)
     assert orders.json()["total"] == 224
+
+
+def test_create_order_rejects_insufficient_stock(
+    client: TestClient, auth_headers: dict[str, str]
+) -> None:
+    response = client.post(
+        "/api/orders",
+        headers=auth_headers,
+        json={
+            "customer_name": "Cliente sin stock",
+            "items": [{"product_id": 1, "quantity": 99}],
+        },
+    )
+    assert response.status_code == 400
+    assert "Stock insuficiente" in response.json()["detail"]

@@ -198,6 +198,17 @@ export const api = {
   orders() {
     return request<ApiOrderPage>('/orders?limit=1000')
   },
+  createOrder(payload: {
+    customer_name: string
+    payment_method: string
+    status: string
+    items: { product_id: number; quantity: number }[]
+  }) {
+    return request<ApiOrder>('/orders', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    })
+  },
   tasks() {
     return request<ApiTask[]>('/tasks')
   },

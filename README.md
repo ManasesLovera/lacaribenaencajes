@@ -16,21 +16,17 @@ renders the same interface.
 
 ### Desktop screens
 
-| Login | Dashboard |
-| --- | --- |
-| ![Login](docs/screenshots/login-desktop.png) | ![Dashboard](docs/screenshots/dashboard.png) |
+| Login | Dashboard | Productos |
+| --- | --- | --- |
+| ![Login](docs/screenshots/login-desktop.png) | ![Dashboard](docs/screenshots/dashboard.png) | ![Productos](docs/screenshots/products.png) |
 
-| Productos | Nuevo producto |
-| --- | --- |
-| ![Productos](docs/screenshots/products.png) | ![Nuevo producto](docs/screenshots/product-modal.png) |
+| Nuevo producto | Registrar venta | Categorías |
+| --- | --- | --- |
+| ![Nuevo producto](docs/screenshots/product-modal.png) | ![Registrar venta](docs/screenshots/sale-modal.png) | ![Categorías](docs/screenshots/categories.png) |
 
-| Categorías | Ventas |
-| --- | --- |
-| ![Categorías](docs/screenshots/categories.png) | ![Ventas](docs/screenshots/sales.png) |
-
-| Operativo | Ajustes |
-| --- | --- |
-| ![Operativo](docs/screenshots/operations.png) | ![Ajustes](docs/screenshots/settings.png) |
+| Ventas | Operativo | Ajustes |
+| --- | --- | --- |
+| ![Ventas](docs/screenshots/sales.png) | ![Operativo](docs/screenshots/operations.png) | ![Ajustes](docs/screenshots/settings.png) |
 
 ### Mobile screens
 
@@ -52,7 +48,7 @@ renders the same interface.
 | Database (SQLite) | Complete | `backend/lacaribena.db`, migrations, and seed data |
 | Docker and Docker Compose | Optional | Postgres Compose file retained for a later migration |
 | Logo production assets | Pending | Export called out as pending in `DESIGN.md` |
-| Tests | Started | 16 backend tests passing; full-stack flow verified with browser QA |
+| Tests | Started | 17 backend tests passing; full-stack flow verified with browser QA |
 
 **Overall phase:** the full stack works end to end. `make dev` runs SQLite, FastAPI, and
 the API-backed frontend together. Production hardening is the next phase.
@@ -270,7 +266,7 @@ Rules:
 | `DELETE` | `/api/products/{id}` | Delete product | Implemented |
 | `GET` | `/api/orders` | List orders by period | Implemented |
 | `GET` | `/api/orders/{id}` | Order detail | Implemented |
-| `POST` | `/api/orders` | Create order with item snapshots | Implemented |
+| `POST` | `/api/orders` | Create order, snapshot items, decrement stock | Implemented |
 | `PATCH` | `/api/orders/{id}` | Update status or payment method | Implemented |
 | `GET` | `/api/tasks` | List tasks | Implemented |
 | `POST` | `/api/tasks` | Create task | Implemented |
@@ -407,7 +403,7 @@ port 5173.
 | `make seed` | Seed SQLite (safe to run more than once) |
 | `make db-reset` | Delete and rebuild the SQLite database |
 | `make db-shell` | Open the SQLite file with `sqlite3` |
-| `make test` | Run the 16 backend tests |
+| `make test` | Run the 17 backend tests |
 | `make lint` | Ruff plus TypeScript type-check |
 | `make build` | Production build of the frontend |
 | `make install` | Install backend and frontend dependencies |

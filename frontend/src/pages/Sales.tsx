@@ -1,7 +1,16 @@
 import { useMemo, useState } from 'preact/hooks'
-import { ArrowUpRight, CreditCard, Banknote, Truck, Wallet } from 'lucide-preact'
+import {
+  ArrowUpRight,
+  Banknote,
+  CreditCard,
+  Download,
+  Plus,
+  Truck,
+  Wallet,
+} from 'lucide-preact'
 import { MonthlyChart } from '../components/charts'
-import { PageHeader, Panel, PeriodTabs } from '../components/ui'
+import { SaleModal } from '../components/SaleModal'
+import { PageHeader, Panel, PeriodTabs, Toast } from '../components/ui'
 import { useData } from '../data/DataContext'
 import {
   delta,
@@ -26,6 +35,8 @@ const methodIcons = {
 export function Sales() {
   const { orders, products, categories } = useData()
   const [period, setPeriod] = useState<Period>('mes')
+  const [creating, setCreating] = useState(false)
+  const [toast, setToast] = useState('')
   const now = new Date()
   const selected = ordersInPeriod(orders, period, now)
   const summary = summarize(selected)
@@ -53,6 +64,49 @@ export function Sales() {
     [categories],
   )
 
+  const exportCsv = () => {
+    const productName = (id: string) =>
+      products.find((product) => product.id === id)?.name ?? 'Producto'
+    const rows = selected.map((order) => [
+      String(order.number),
+      order.customerName,
+      new Date(order.soldAt).toISOString(),
+      order.paymentMethod,
+      order.status,
+      order.items
+        .map((item) => `${item.quantity}x ${productName(item.productId)}`)
+        .join(' | '),
+      order.total.toFixed(2),
+    ])
+    const header = [
+      'Número',
+      'Cliente',
+      'Fecha',
+      'Método de pago',
+      'Estado',
+      'Productos',
+      'Total',
+    ]
+    const csv = [header, ...rows]
+      .map((row) =>
+        row.map((value) => `"${String(value).replace(/"/g, '""')}"`).join(','),
+      )
+      .join('\n')
+    const blob = new Blob([`\ufeff${csv}`], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `ventas-${period}-${new Date().toISOString().slice(0, 10)}.csv`
+    link.click()
+    URL.revokeObjectURL(url)
+  }
+
+  const saleCreated = (number: number) => {
+    setCreating(false)
+    setToast(`Venta #${number} registrada`)
+    window.setTimeout(() => setToast(''), 4000)
+  }
+
   return (
     <>
       <PageHeader
@@ -63,6 +117,16 @@ export function Sales() {
         }).format(now).toUpperCase()}
         title="Ventas"
         subtitle={`${periodLabel}, en números · cifras en pesos dominicanos, actualizadas a las ${new Intl.DateTimeFormat('es-DO', { hour: 'numeric', minute: '2-digit' }).format(now)}.`}
+        actions={
+          <>
+            <button type="button" class="button button--secondary" onClick={exportCsv}>
+              <Download size={18} /> Exportar
+            </button>
+            <button type="button" class="button button--primary" onClick={() => setCreating(true)}>
+              <Plus size={18} /> Registrar venta
+            </button>
+          </>
+        }
       />
 
       <PeriodTabs value={period} onChange={setPeriod} />
@@ -210,6 +274,15 @@ export function Sales() {
           ))}
         </div>
       </Panel>
+
+      {creating && (
+        <SaleModal
+          onClose={() => setCreating(false)}
+          onCreated={(order) => saleCreated(order.number)}
+        />
+      )}
+
+      {toast && <Toast message={toast} onClose={() => setToast('')} />}
     </>
   )
 }

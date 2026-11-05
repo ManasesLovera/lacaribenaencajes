@@ -201,14 +201,7 @@ def generate_orders(db, products: list[Product]) -> int:
         make_order(now - timedelta(days=rng.random() * 44))
 
     for index in range(4):
-        make_order(
-            now.replace(
-                hour=9 + index * 2,
-                minute=5 + index * 3,
-                second=0,
-                microsecond=0,
-            )
-        )
+        make_order(now - timedelta(minutes=35 * (index + 1)))
 
     db.add_all(orders)
     db.flush()
