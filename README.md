@@ -327,7 +327,8 @@ holds the JWT. Demo mode uses the same component with seeded localStorage data.
 - [x] Add demo authentication with a local session
 - [x] Add dashboard, sales, and operations modules
 - [x] Persist products, categories, tasks, orders, and settings in SQLite
-- [ ] Produce logo assets and self-host fonts
+- [ ] Produce logo assets
+- [x] Self-host the design fonts for offline reliability
 - [ ] Add production container images
 
 ---
