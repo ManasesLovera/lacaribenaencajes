@@ -9,6 +9,35 @@ non-technical owner.
 - **Sources of truth:** `DESIGN.md` (design system v1) and `design.pen` (high-fidelity UI).
 - **Last reviewed:** 2026-11-05.
 
+## Screenshots
+
+Captured from the seeded app running through `make demo`; the full-stack SQLite mode
+renders the same interface.
+
+### Desktop screens
+
+| Login | Dashboard |
+| --- | --- |
+| ![Login](docs/screenshots/login-desktop.png) | ![Dashboard](docs/screenshots/dashboard.png) |
+
+| Productos | Nuevo producto |
+| --- | --- |
+| ![Productos](docs/screenshots/products.png) | ![Nuevo producto](docs/screenshots/product-modal.png) |
+
+| Categorías | Ventas |
+| --- | --- |
+| ![Categorías](docs/screenshots/categories.png) | ![Ventas](docs/screenshots/sales.png) |
+
+| Operativo | Ajustes |
+| --- | --- |
+| ![Operativo](docs/screenshots/operations.png) | ![Ajustes](docs/screenshots/settings.png) |
+
+### Mobile screens
+
+| Login | Dashboard | Productos |
+| --- | --- | --- |
+| ![Login móvil](docs/screenshots/login-mobile.png) | ![Dashboard móvil](docs/screenshots/dashboard-mobile.png) | ![Productos móvil](docs/screenshots/products-mobile.png) |
+
 ---
 
 ## 1. Project status

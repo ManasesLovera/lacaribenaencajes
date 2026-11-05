@@ -72,7 +72,7 @@ export function Shell({ path, children, onLogout }: Props) {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [search, setSearch] = useState('')
   const alerts = products.filter(
-    (product) => product.stock <= product.minStock,
+    (product) => product.stock < product.minStock,
   ).length
 
   const isActive = (itemPath: string) =>
