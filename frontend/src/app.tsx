@@ -20,11 +20,20 @@ import { Dashboard } from './pages/Dashboard'
 import { Login } from './pages/Login'
 import { Operations } from './pages/Operations'
 import { Products } from './pages/Products'
+import { Profile } from './pages/Profile'
 import { Sales } from './pages/Sales'
 import { Settings } from './pages/Settings'
 import './app.css'
 
-function Page({ path, query }: { path: string; query: URLSearchParams }) {
+function Page({
+  path,
+  query,
+  onLogout,
+}: {
+  path: string
+  query: URLSearchParams
+  onLogout: () => void
+}) {
   switch (path) {
     case '/productos':
       return <Products query={query} />
@@ -36,6 +45,8 @@ function Page({ path, query }: { path: string; query: URLSearchParams }) {
       return <Operations />
     case '/ajustes':
       return <Settings />
+    case '/perfil':
+      return <Profile onLogout={onLogout} />
     case '/dashboard':
     default:
       return <Dashboard />
@@ -121,7 +132,7 @@ export function App() {
   return (
     <DataProvider onLogout={logout}>
       <Shell path={route.path} onLogout={logout}>
-        <Page path={route.path} query={route.query} />
+        <Page path={route.path} query={route.query} onLogout={logout} />
       </Shell>
     </DataProvider>
   )

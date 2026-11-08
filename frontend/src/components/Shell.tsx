@@ -11,6 +11,7 @@ import {
   Settings as SettingsIcon,
   ShoppingBag,
   Tags,
+  UserRound,
   X,
 } from 'lucide-preact'
 import { useData } from '../data/DataContext'
@@ -42,7 +43,10 @@ const groups: { label: string; items: NavItem[] }[] = [
   },
   {
     label: 'Cuenta',
-    items: [{ label: 'Ajustes', path: '/ajustes', icon: SettingsIcon }],
+    items: [
+      { label: 'Mi perfil', path: '/perfil', icon: UserRound },
+      { label: 'Ajustes', path: '/ajustes', icon: SettingsIcon },
+    ],
   },
 ]
 
@@ -50,6 +54,7 @@ const mobileItems: NavItem[] = [
   { label: 'Resumen', path: '/dashboard', icon: LayoutDashboard },
   { label: 'Productos', path: '/productos', icon: Package },
   { label: 'Categorías', path: '/categorias', icon: Tags },
+  { label: 'Mi perfil', path: '/perfil', icon: UserRound },
   { label: 'Ajustes', path: '/ajustes', icon: SettingsIcon },
 ]
 
@@ -60,6 +65,7 @@ const titles: Record<string, string> = {
   '/ventas': 'Ventas',
   '/operativo': 'Operativo',
   '/ajustes': 'Ajustes',
+  '/perfil': 'Mi perfil',
 }
 
 type Props = {
