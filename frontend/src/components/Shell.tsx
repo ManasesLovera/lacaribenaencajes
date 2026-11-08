@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks'
+import { useEffect, useRef, useState } from 'preact/hooks'
 import type { ComponentChildren } from 'preact'
 import {
   Activity,
@@ -14,6 +14,7 @@ import {
   X,
 } from 'lucide-preact'
 import { useData } from '../data/DataContext'
+import { ProfileMenu } from './ProfileMenu'
 import { navigate } from '../lib/router'
 import { Avatar, Logo } from './Brand'
 
@@ -70,10 +71,32 @@ type Props = {
 export function Shell({ path, children, onLogout }: Props) {
   const { settings, products } = useData()
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [profileOpen, setProfileOpen] = useState(false)
   const [search, setSearch] = useState('')
+  const profileRef = useRef<HTMLDivElement>(null)
   const alerts = products.filter(
     (product) => product.stock < product.minStock,
   ).length
+
+  useEffect(() => {
+    if (!profileOpen) return
+
+    const onPointerDown = (event: MouseEvent) => {
+      if (!profileRef.current?.contains(event.target as Node)) {
+        setProfileOpen(false)
+      }
+    }
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setProfileOpen(false)
+    }
+
+    document.addEventListener('mousedown', onPointerDown)
+    document.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.removeEventListener('mousedown', onPointerDown)
+      document.removeEventListener('keydown', onKeyDown)
+    }
+  }, [profileOpen])
 
   const isActive = (itemPath: string) =>
     path === itemPath || path.startsWith(`${itemPath}/`)
@@ -176,14 +199,31 @@ export function Shell({ path, children, onLogout }: Props) {
               <Bell size={20} />
               {alerts > 0 && <span class="badge">{alerts}</span>}
             </button>
-            <button
-              type="button"
-              class="topbar__avatar"
-              onClick={() => navigate('/ajustes')}
-              aria-label="Ajustes de la cuenta"
-            >
-              <Avatar name={settings.ownerName} size="sm" />
-            </button>
+            <div class="profile-wrap" ref={profileRef}>
+              <button
+                type="button"
+                class="topbar__avatar"
+                onClick={() => setProfileOpen((open) => !open)}
+                aria-label="Abrir menú de perfil"
+                aria-haspopup="menu"
+                aria-expanded={profileOpen}
+              >
+                <Avatar name={settings.ownerName} size="sm" />
+              </button>
+              {profileOpen && (
+                <ProfileMenu
+                  settings={settings}
+                  onSettings={() => {
+                    setProfileOpen(false)
+                    navigate('/ajustes')
+                  }}
+                  onLogout={() => {
+                    setProfileOpen(false)
+                    onLogout()
+                  }}
+                />
+              )}
+            </div>
           </div>
         </header>
 

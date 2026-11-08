@@ -28,6 +28,10 @@ renders the same interface.
 | --- | --- | --- |
 | ![Ventas](docs/screenshots/sales.png) | ![Operativo](docs/screenshots/operations.png) | ![Ajustes](docs/screenshots/settings.png) |
 
+### Menú de perfil
+
+![Menú de perfil](docs/screenshots/profile-menu.png)
+
 ### Mobile screens
 
 | Login | Dashboard | Productos |
