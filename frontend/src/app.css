@@ -2632,112 +2632,288 @@ button:disabled {
 
 .login {
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+  grid-template-columns: 600px minmax(0, 1fr);
   min-height: 100vh;
-  background: var(--cream-50);
+  background: var(--cream-100);
 }
 
 .login__editorial {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 18px;
+  justify-content: space-between;
   overflow: hidden;
-  padding: clamp(40px, 7vw, 96px);
+  padding: 56px;
   background: var(--wine-800);
   color: var(--cream-50);
 }
 
-.login__editorial .logo {
-  align-items: flex-start;
-  text-align: left;
-  margin-bottom: 24px;
-}
-
-.login__spark {
+.login__art {
   position: absolute;
-  top: 48px;
-  right: 56px;
-  color: var(--blush-300);
-  font-size: 26px;
-  opacity: 0.7;
+  inset: 0;
+  pointer-events: none;
 }
 
-.login__headline {
-  max-width: 520px;
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(40px, 4.6vw, 62px);
-  font-weight: 500;
-  line-height: 0.98;
-  letter-spacing: -0.02em;
+.login__glow {
+  position: absolute;
+  top: 420px;
+  left: 140px;
+  width: 640px;
+  height: 640px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgb(220 163 150 / 24%) 0%,
+    rgb(220 163 150 / 0%) 72%
+  );
 }
 
-.login__headline em {
-  display: block;
-  margin-top: 8px;
-  font-family: var(--font-script);
-  font-style: normal;
-  font-weight: 400;
-  color: var(--blush-200);
-  letter-spacing: 0;
+.login__ring {
+  position: absolute;
+  border: 1px solid rgb(243 207 197 / 18%);
+  border-radius: 50%;
 }
 
-.login__lede {
-  max-width: 420px;
-  margin: 8px 0 0;
-  color: var(--blush-100);
-  font-size: 14px;
-  line-height: 1.6;
+.login__ring--1 {
+  top: 420px;
+  left: 180px;
+  width: 760px;
+  height: 760px;
+  border-color: rgb(243 207 197 / 8%);
 }
 
-.login__place {
-  display: inline-flex;
+.login__ring--2 {
+  top: 500px;
+  left: 260px;
+  width: 600px;
+  height: 600px;
+}
+
+.login__ring--3 {
+  top: 574px;
+  left: 334px;
+  width: 452px;
+  height: 452px;
+}
+
+.login__ring--4 {
+  top: 641px;
+  left: 401px;
+  width: 318px;
+  height: 318px;
+}
+
+.login__ring--core {
+  top: 696px;
+  left: 456px;
+  width: 208px;
+  height: 208px;
+  border-color: rgb(233 185 174 / 33%);
+}
+
+.login__logo-block {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 0 0 auto;
   align-items: center;
-  gap: 7px;
-  margin: 18px 0 0;
-  color: rgb(251 246 241 / 60%);
-  font-size: 10px;
-  letter-spacing: 0.12em;
+  justify-content: center;
+  width: 236px;
+  height: 96px;
+  border-radius: var(--radius-sm);
+  background: var(--wine-700);
+}
+
+.login__logo-block .logo {
+  color: var(--cream-50);
+}
+
+.login__logo-block .logo__la {
+  margin: 0 0 0 3px;
+  font-size: 13px;
+  letter-spacing: 3px;
+}
+
+.login__logo-block .logo__script {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.login__logo-block .logo__caps {
+  margin: 0 0 0 5px;
+  font-size: 12px;
+  letter-spacing: 5px;
+}
+
+.login__copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 100%;
+}
+
+.login__eyebrow {
+  margin: 0;
+  color: var(--blush-300);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.136em;
   text-transform: uppercase;
 }
 
-.login__ghost {
-  position: absolute;
-  right: 24px;
-  bottom: 10px;
+.login__headline {
+  margin: 0;
+  color: var(--cream-50);
+  font-family: var(--font-display);
+  font-size: 46px;
+  font-weight: 500;
+  line-height: 1.14;
+}
+
+.login__script {
+  margin: 0;
+  color: var(--blush-200);
   font-family: var(--font-script);
-  font-size: clamp(48px, 7vw, 92px);
-  color: rgb(243 207 197 / 8%);
-  pointer-events: none;
-  white-space: nowrap;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.login__lede {
+  margin: 0;
+  color: rgb(251 246 241 / 72%);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.login__lede--mobile {
+  display: none;
+}
+
+.login__foot {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.login__rule {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: rgb(243 207 197 / 15%);
+}
+
+.login__location {
+  margin: 0;
+  color: rgb(251 246 241 / 60%);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 
 .login__form-wrap {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 40px clamp(24px, 5vw, 72px);
+  align-items: center;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: 56px 72px 48px;
+  background: var(--cream-100);
+}
+
+.login__top-spacer {
+  width: 100%;
+  height: 1px;
 }
 
 .login__form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: 400px;
+  max-width: 100%;
+}
+
+.login__form-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   width: 100%;
-  max-width: 430px;
-  margin: 0 auto;
+}
+
+.login__form-header .eyebrow {
+  margin: 0;
+  color: var(--wine-700);
+  font-size: 11px;
+  letter-spacing: 0.136em;
+}
+
+.login__title-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.login__title {
+  margin: 0;
+  color: var(--ink-900);
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.login__title-script {
+  color: var(--wine-600);
+  font-family: var(--font-script);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.1;
+  white-space: nowrap;
 }
 
 .login__intro {
-  margin: 8px 0 26px;
+  margin: 0;
   color: var(--ink-600);
-  font-size: 13px;
-  line-height: 1.55;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .login__form form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 28px;
+}
+
+.login__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.login__fields .field {
+  gap: 8px;
+}
+
+.login__fields .field__label {
+  font-size: 11px;
+  letter-spacing: 0.136em;
+}
+
+.login__fields .field input {
+  height: 44px;
+  padding: 0 14px;
+}
+
+.login__fields .field__password input {
+  padding-right: 44px;
 }
 
 .login__row {
@@ -2747,68 +2923,200 @@ button:disabled {
   gap: 12px;
 }
 
-.demo-card {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 24px;
-  padding: 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  background: var(--blush-100);
-}
-
-.demo-card__icon {
-  display: grid;
-  place-items: center;
-  flex: 0 0 auto;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--cream-50);
-  color: var(--wine-700);
-}
-
-.demo-card > div {
-  flex: 1;
-  min-width: 0;
-}
-
-.demo-card strong {
-  display: block;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.demo-card p {
-  margin: 2px 0 0;
-  overflow: hidden;
+.login__row .checkbox {
+  gap: 10px;
   color: var(--ink-600);
-  font-size: 11px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: 13px;
+}
+
+.login__row .checkbox input {
+  width: 18px;
+  height: 18px;
+}
+
+.login__forgot {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.login__submit {
+  height: 48px;
 }
 
 .login__help {
-  margin: 20px 0 0;
-  color: var(--ink-600);
-  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 0;
+  padding-top: 2px;
+  color: var(--ink-400);
+  font-size: 13px;
+}
+
+.login__help-link {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--wine-700);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.login__help-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .login__footer {
   display: flex;
-  justify-content: space-between;
-  gap: 16px;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
   width: 100%;
-  max-width: 430px;
-  margin: 40px auto 0;
   padding-top: 18px;
   border-top: 1px solid var(--line);
   color: var(--ink-400);
-  font-size: 10px;
+  font-size: 11px;
+  text-align: center;
 }
 
-/* ---------- Sale modal ---------- */
+.login__footer-short {
+  display: none;
+}
+
+@media (max-width: 1279px) {
+  .login {
+    grid-template-columns: 520px minmax(0, 1fr);
+  }
+
+  .login__editorial {
+    padding: 48px;
+  }
+
+  .login__form-wrap {
+    padding: 48px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .login {
+    grid-template-columns: 1fr;
+  }
+
+  .login__editorial {
+    align-items: center;
+    justify-content: flex-start;
+    gap: 18px;
+    min-height: auto;
+    padding: 52px 24px 44px;
+  }
+
+  .login__logo-block {
+    width: 188px;
+    height: 88px;
+  }
+
+  .login__copy {
+    align-items: center;
+    gap: 18px;
+    text-align: center;
+  }
+
+  .login__eyebrow,
+  .login__headline,
+  .login__foot,
+  .login__lede--desktop {
+    display: none;
+  }
+
+  .login__script {
+    font-size: 26px;
+  }
+
+  .login__lede--mobile {
+    display: block;
+    width: 300px;
+    max-width: 100%;
+    font-size: 12.5px;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .login__form-wrap {
+    flex: 1;
+    justify-content: space-between;
+    min-height: auto;
+    padding: 28px 24px 20px;
+  }
+
+  .login__top-spacer {
+    display: none;
+  }
+
+  .login__form {
+    gap: 22px;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .login__form-header {
+    gap: 8px;
+  }
+
+  .login__form-header .eyebrow {
+    font-size: 10px;
+  }
+
+  .login__title {
+    font-size: 26px;
+    line-height: 1.15;
+  }
+
+  .login__title-script {
+    display: none;
+  }
+
+  .login__intro {
+    font-size: 13px;
+  }
+
+  .login__form form {
+    gap: 22px;
+  }
+
+  .login__fields {
+    gap: 14px;
+  }
+
+  .login__forgot {
+    font-size: 12px;
+  }
+
+  .login__help {
+    font-size: 12px;
+  }
+
+  .login__help-link {
+    font-size: 12px;
+  }
+
+  .login__footer {
+    gap: 6px;
+    padding-top: 14px;
+    font-size: 10px;
+  }
+
+  .login__footer-full {
+    display: none;
+  }
+
+  .login__footer-short {
+    display: inline;
+  }
+}
+
+/* ---------- Sale modal ---------- *//* ---------- Sale modal ---------- */
 
 .sale-form {
   display: flex;
@@ -3530,18 +3838,6 @@ button:disabled {
     display: none;
   }
 
-  .login__editorial .logo__la {
-    font-size: 30px;
-  }
-
-  .login__editorial .logo__script {
-    font-size: 42px;
-  }
-
-  .login__editorial .logo__caps {
-    font-size: 19px;
-  }
-
   .chart__plot {
     height: 190px;
     gap: 3px;
@@ -3557,39 +3853,6 @@ button:disabled {
 
   .daily-chart {
     height: 180px;
-  }
-
-  .login {
-    grid-template-columns: 1fr;
-  }
-
-  .login__editorial {
-    min-height: 34vh;
-    padding: 28px 24px;
-  }
-
-  .login__editorial .logo {
-    margin-bottom: 10px;
-  }
-
-  .login__headline {
-    font-size: 34px;
-  }
-
-  .login__lede,
-  .login__place,
-  .login__ghost {
-    display: none;
-  }
-
-  .login__form-wrap {
-    padding: 28px 20px 40px;
-  }
-
-  .login__footer {
-    margin-top: 24px;
-    flex-direction: column;
-    gap: 4px;
   }
 
   .settings-actions .button {

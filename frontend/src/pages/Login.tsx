@@ -1,7 +1,6 @@
 import { useState } from 'preact/hooks'
-import { ArrowRight, Eye, EyeOff, Lock, MapPin } from 'lucide-preact'
+import { ArrowRight, Eye, EyeOff } from 'lucide-preact'
 import { Logo } from '../components/Brand'
-import { DEMO_EMAIL, DEMO_PASSWORD } from '../lib/auth'
 
 type Props = {
   onLogin: (email: string, password: string, remember: boolean) => Promise<void>
@@ -16,12 +15,6 @@ export function Login({ onLogin }: Props) {
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
-
-  const fillDemo = () => {
-    setEmail(DEMO_EMAIL)
-    setPassword(DEMO_PASSWORD)
-    setError('')
-  }
 
   const submit = async (event: Event) => {
     event.preventDefault()
@@ -51,74 +44,93 @@ export function Login({ onLogin }: Props) {
   return (
     <main class="login">
       <section class="login__editorial">
-        <div class="login__spark" aria-hidden="true">
-          ✦
+        <div class="login__art" aria-hidden="true">
+          <span class="login__glow" />
+          <span class="login__ring login__ring--1" />
+          <span class="login__ring login__ring--2" />
+          <span class="login__ring login__ring--3" />
+          <span class="login__ring login__ring--4" />
+          <span class="login__ring login__ring--core" />
         </div>
-        <p class="eyebrow eyebrow--on-wine">Acceso privado al atelier</p>
-        <Logo size="lg" />
-        <h1 class="login__headline">
-          Cada encaje, <em>en su lugar.</em>
-        </h1>
-        <p class="login__lede">
-          Un solo lugar para tu inventario, tus precios en pesos dominicanos y
-          cada pedido que sale del taller.
-        </p>
-        <p class="login__place">
-          <MapPin size={16} />
-          Santo Domingo · República Dominicana
-        </p>
-        <span class="login__ghost" aria-hidden="true">
-          bienvenida de nuevo
-        </span>
+
+        <div class="login__logo-block">
+          <Logo />
+        </div>
+
+        <div class="login__copy">
+          <p class="login__eyebrow">— ACCESO PRIVADO AL ATELIER</p>
+          <h1 class="login__headline">Cada encaje, en su lugar.</h1>
+          <p class="login__script">bienvenida de nuevo</p>
+          <p class="login__lede login__lede--desktop">
+            Un solo lugar para tu inventario, tus precios en pesos dominicanos y
+            cada pedido que sale del taller.
+          </p>
+          <p class="login__lede login__lede--mobile">
+            Un solo lugar para tu inventario, tus precios y cada pedido del
+            taller.
+          </p>
+        </div>
+
+        <div class="login__foot">
+          <span class="login__rule" />
+          <p class="login__location">SANTO DOMINGO · REPÚBLICA DOMINICANA</p>
+        </div>
       </section>
 
       <section class="login__form-wrap">
+        <div class="login__top-spacer" aria-hidden="true" />
         <div class="login__form">
-          <p class="eyebrow">— Panel de administración</p>
-          <h2 class="display-lg">Iniciar sesión</h2>
-          <p class="login__intro">
-            qué bueno verte. Ingresa con tu correo para gestionar inventario,
-            precios y pedidos.
-          </p>
+          <header class="login__form-header">
+            <p class="eyebrow">— PANEL DE ADMINISTRACIÓN</p>
+            <div class="login__title-row">
+              <h2 class="login__title">Iniciar sesión</h2>
+              <span class="login__title-script">qué bueno verte</span>
+            </div>
+            <p class="login__intro">
+              Ingresa con tu correo para gestionar inventario, precios y pedidos.
+            </p>
+          </header>
 
           <form onSubmit={submit} novalidate>
-            <label class="field">
-              <span class="field__label">Correo electrónico</span>
-              <input
-                type="email"
-                autocomplete="email"
-                value={email}
-                onInput={(event) =>
-                  setEmail((event.currentTarget as HTMLInputElement).value)
-                }
-                placeholder="tu@correo.com"
-                required
-              />
-            </label>
-
-            <label class="field">
-              <span class="field__label">Contraseña</span>
-              <div class="field__password">
+            <div class="login__fields">
+              <label class="field">
+                <span class="field__label">Correo electrónico</span>
                 <input
-                  type={(showPassword ? 'text' : 'password') as 'text'}
-                  autocomplete="current-password"
-                  value={password}
+                  type="email"
+                  autocomplete="email"
+                  value={email}
                   onInput={(event) =>
-                    setPassword((event.currentTarget as HTMLInputElement).value)
+                    setEmail((event.currentTarget as HTMLInputElement).value)
                   }
-                  placeholder="••••••••"
+                  placeholder="yesenia@lacaribena.do"
                   required
                 />
-                <button
-                  type="button"
-                  class="field__reveal"
-                  onClick={() => setShowPassword((value) => !value)}
-                  aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
-                >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              </div>
-            </label>
+              </label>
+
+              <label class="field">
+                <span class="field__label">Contraseña</span>
+                <div class="field__password">
+                  <input
+                    type={(showPassword ? 'text' : 'password') as 'text'}
+                    autocomplete="current-password"
+                    value={password}
+                    onInput={(event) =>
+                      setPassword((event.currentTarget as HTMLInputElement).value)
+                    }
+                    placeholder="••••••••••"
+                    required
+                  />
+                  <button
+                    type="button"
+                    class="field__reveal"
+                    onClick={() => setShowPassword((value) => !value)}
+                    aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                  >
+                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                  </button>
+                </div>
+              </label>
+            </div>
 
             <div class="login__row">
               <label class="checkbox">
@@ -131,7 +143,7 @@ export function Login({ onLogin }: Props) {
                 />
                 <span>Recordarme</span>
               </label>
-              <button type="button" class="link-button" onClick={fillDemo}>
+              <button type="button" class="link-button login__forgot">
                 ¿Olvidaste tu contraseña?
               </button>
             </div>
@@ -144,37 +156,31 @@ export function Login({ onLogin }: Props) {
 
             <button
               type="submit"
-              class="button button--primary button--full"
+              class="button button--primary button--full login__submit"
               disabled={submitting}
             >
-              {submitting ? 'Entrando…' : 'Entrar al panel'}
               {!submitting && <ArrowRight size={18} />}
+              {submitting ? 'Entrando…' : 'Entrar'}
             </button>
+
+            <p class="login__help">
+              <span>¿Problemas para entrar?</span>
+              <button type="button" class="login__help-link">
+                Escríbenos
+              </button>
+            </p>
           </form>
-
-          <div class="demo-card">
-            <span class="demo-card__icon">
-              <Lock size={16} />
-            </span>
-            <div>
-              <strong>Credenciales de la tienda</strong>
-              <p>
-                {DEMO_EMAIL} · {DEMO_PASSWORD}
-              </p>
-            </div>
-            <button type="button" class="button button--secondary button--sm" onClick={fillDemo}>
-              Usar
-            </button>
-          </div>
-
-          <p class="login__help">
-            ¿Problemas para entrar? <button type="button" class="link-button">Escríbenos</button>
-          </p>
         </div>
 
         <footer class="login__footer">
-          <span>© 2026 La Caribeña Encajes · Todos los derechos reservados</span>
-          <span>Privacidad · Términos</span>
+          <span class="login__footer-full">
+            © 2026 La Caribeña Encajes · Todos los derechos reservados
+          </span>
+          <span class="login__footer-short">© 2026 La Caribeña Encajes</span>
+          <span class="login__footer-full">
+            Política de privacidad · Términos de servicio
+          </span>
+          <span class="login__footer-short">Privacidad · Términos</span>
         </footer>
       </section>
     </main>
