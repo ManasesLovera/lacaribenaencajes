@@ -7,15 +7,16 @@ from sqlalchemy.orm import Session, sessionmaker
 from lacaribena_api.core.config import get_settings
 
 settings = get_settings()
+database_url = settings.sqlalchemy_url
 
 connect_args = (
     {"check_same_thread": False}
-    if settings.database_url.startswith("sqlite")
+    if database_url.startswith("sqlite")
     else {}
 )
 
 engine = create_engine(
-    settings.database_url,
+    database_url,
     pool_pre_ping=True,
     connect_args=connect_args,
 )
@@ -24,7 +25,7 @@ SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False
 
 @event.listens_for(Engine, "connect")
 def enable_sqlite_foreign_keys(dbapi_connection, connection_record) -> None:
-    if settings.database_url.startswith("sqlite"):
+    if database_url.startswith("sqlite"):
         cursor = dbapi_connection.cursor()
         cursor.execute("PRAGMA foreign_keys=ON")
         cursor.close()

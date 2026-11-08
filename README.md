@@ -49,8 +49,9 @@ renders the same interface.
 | Scope reconciliation | Decision needed | Design file covers more modules than the v1 doc |
 | Frontend (Preact + TypeScript) | Complete | All designed views, API-backed CRUD, JWT session |
 | Backend (Python + FastAPI + SQLAlchemy) | Complete | JWT auth, CRUD, analytics, seeded data on SQLite |
-| Database (SQLite) | Complete | `backend/lacaribena.db`, migrations, and seed data |
-| Docker and Docker Compose | Optional | Postgres Compose file retained for a later migration |
+| Database (SQLite) | Complete | `backend/lacaribena.db`, migrations, and seed data for dev |
+| Database (Neon Postgres) | Complete | Production mode; schema and login only, no demo data |
+| Docker and Docker Compose | Optional | Not required by dev or production |
 | Logo production assets | Pending | Export called out as pending in `DESIGN.md` |
 | Tests | Started | 17 backend tests passing; full-stack flow verified with browser QA |
 
@@ -144,8 +145,9 @@ Demo credentials match the frontend: `yesenia@lacaribenaencajes.com` /
 | Backend | Python + FastAPI | REST API, OpenAPI docs at `/docs` |
 | Dependency manager | uv | Backend only; frontend uses npm |
 | Authentication | JWT + Argon2 | `pwdlib` hashing and `pyjwt` tokens |
-| ORM / migrations | SQLAlchemy + Alembic | Two migrations applied to SQLite |
-| Database | SQLite | `backend/lacaribena.db`, switchable through `DATABASE_URL` |
+| ORM / migrations | SQLAlchemy + Alembic | SQLite locally, Postgres on Neon in production |
+| Database (dev) | SQLite | `backend/lacaribena.db`, the default when `ENVIRONMENT=development` |
+| Database (prod) | Neon Postgres | `DATABASE_URL` from `neon deploy`; used when `ENVIRONMENT=production` |
 | Local runtime | Make | SQLite needs no database container |
 | Currency | `RD$`, Dominican formatting | Money stored as `NUMERIC(12,2)` |
 
@@ -153,12 +155,13 @@ Demo credentials match the frontend: `yesenia@lacaribenaencajes.com` /
 
 | Service | How it runs | Port | Purpose |
 | --- | --- | --- | --- |
-| `api` | `uv run uvicorn` | 8000 | FastAPI and SQLite access |
+| `api` | `uv run uvicorn` | 8000 | FastAPI and database access |
 | `web` | `npm run dev` | 5173 | Preact frontend |
-| `db` | SQLite file | — | `backend/lacaribena.db` |
+| `db` (dev) | SQLite file | — | `backend/lacaribena.db` |
+| `db` (prod) | Neon Postgres | — | Pooled `DATABASE_URL`; direct URL for migrations |
 
-`docker-compose.yml` still provisions Postgres for a future migration, but it is not
-required by the SQLite setup. FastAPI and Vite run on the host through `uv` and npm.
+FastAPI and Vite run on the host through `uv` and npm. `docker-compose.yml` still
+provisions a local Postgres, but neither dev nor production needs it.
 
 ---
 
@@ -355,8 +358,8 @@ holds the JWT. Demo mode uses the same component with seeded localStorage data.
 
 ## 10. Running the project
 
-Requires Node.js 20+, uv, and GNU Make. Docker and Postgres are not used while the
-database is SQLite.
+Requires Node.js 20+, uv, and GNU Make. Development uses SQLite; production uses Neon
+Postgres. Docker Compose is optional and not needed by either mode.
 
 ### Run the full stack
 
@@ -380,6 +383,33 @@ Sign in with the only seeded account:
 The frontend stores only the JWT; all shop data is read from and written to SQLite
 through the API. Use **Ajustes → Restaurar datos de ejemplo** to reseed the database.
 
+### Run against Neon Postgres (production mode)
+
+Production mode is opt-in through `ENVIRONMENT=production`. The default
+(`ENVIRONMENT=development`) continues to use `LOCAL_DATABASE_URL` and never touches
+Neon. `neon deploy` writes the pooled `DATABASE_URL` and the direct
+`DATABASE_URL_UNPOOLED` into `.env`; the app uses the pooled URL and migrations use the
+direct one.
+
+```bash
+# First-time schema and login only; no demo catalog is copied from SQLite.
+make migrate-prod
+make seed-credentials
+
+# Start the API against Neon.
+make backend-prod
+
+# Or run both the Neon-backed API and the frontend together.
+make prod
+```
+
+The production database starts empty except for the seeded login account:
+
+- **Email:** `yesenia@lacaribenaencajes.com`
+- **Password:** `lacaribenaencajes`
+
+Change `SECRET_KEY` and the seeded password before exposing this deployment publicly.
+
 ### Run the frontend-only demo
 
 ```bash
@@ -402,6 +432,10 @@ port 5173.
 | `make dev` | Full stack: migrations, seed, SQLite API, and Vite |
 | `make demo` | Frontend only: seeded browser data in localStorage |
 | `make backend` | Migrate, seed, and run FastAPI alone |
+| `make migrate-prod` | Apply Alembic migrations to Neon Postgres |
+| `make seed-credentials` | Create only the login account in Neon Postgres |
+| `make backend-prod` | Run FastAPI against Neon Postgres |
+| `make prod` | Run the Neon-backed API and the frontend together |
 | `make frontend` | Vite alone (requires the API on port 8000) |
 | `make migrate` | Apply Alembic migrations to SQLite |
 | `make migration m="message"` | Autogenerate a migration |

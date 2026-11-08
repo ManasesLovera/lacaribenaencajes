@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import random
 from datetime import datetime, timedelta
 from decimal import Decimal
@@ -260,7 +261,27 @@ def reset_demo(db) -> None:
     db.commit()
 
 
+def seed_credentials() -> None:
+    """Create only the login account, without demo catalog or sales data."""
+    with SessionLocal() as db:
+        created = seed_user(db)
+        db.commit()
+        print(f"Credentials {'created' if created else 'already exist'}.")
+
+
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Seed the local demo database")
+    parser.add_argument(
+        "--credentials-only",
+        action="store_true",
+        help="create only the login account (use for production)",
+    )
+    args = parser.parse_args()
+
+    if args.credentials_only:
+        seed_credentials()
+        return
+
     with SessionLocal() as db:
         user_created = seed_user(db)
         categories = seed_categories(db)

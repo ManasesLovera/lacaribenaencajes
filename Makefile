@@ -5,7 +5,7 @@ BACKEND := backend
 FRONTEND := frontend
 DB_FILE := $(BACKEND)/lacaribena.db
 
-.PHONY: help install env demo migrate migration seed db-reset db-shell backend frontend dev test lint build
+.PHONY: help install env demo migrate migration seed db-reset db-shell backend frontend dev prod test lint build migrate-prod seed-credentials backend-prod
 
 help: ## Show available commands
 	@echo "La Caribeña Encajes"
@@ -42,6 +42,15 @@ db-shell: ## Open the SQLite database
 backend: seed ## Run FastAPI against SQLite
 	cd $(BACKEND) && uv run uvicorn lacaribena_api.main:app --reload --host 0.0.0.0 --port 8000
 
+migrate-prod: ## Apply Alembic migrations to Neon Postgres
+	cd $(BACKEND) && ENVIRONMENT=production uv run alembic upgrade head
+
+seed-credentials: ## Create only the login account in Neon Postgres
+	cd $(BACKEND) && ENVIRONMENT=production uv run python -m lacaribena_api.seed --credentials-only
+
+backend-prod: ## Run FastAPI against Neon Postgres
+	cd $(BACKEND) && ENVIRONMENT=production uv run uvicorn lacaribena_api.main:app --host 0.0.0.0 --port 8000
+
 frontend: ## Run the Vite dev server
 	cd $(FRONTEND) && npm run dev -- --host 0.0.0.0
 
@@ -50,6 +59,14 @@ dev: install seed ## Run the full stack: SQLite API + frontend
 	@set -e; \
 	trap 'kill $$BACK_PID $$FRONT_PID 2>/dev/null || true' INT TERM EXIT; \
 	(cd $(BACKEND) && uv run uvicorn lacaribena_api.main:app --reload --host 0.0.0.0 --port 8000) & BACK_PID=$$!; \
+	(cd $(FRONTEND) && npm run dev -- --host 0.0.0.0) & FRONT_PID=$$!; \
+	wait
+
+prod: ## Run the full stack against Neon Postgres
+	@echo "Full stack (Neon prod): http://localhost:5173   API docs: http://localhost:8000/docs"
+	@set -e; \
+	trap 'kill $$BACK_PID $$FRONT_PID 2>/dev/null || true' INT TERM EXIT; \
+	(cd $(BACKEND) && ENVIRONMENT=production uv run uvicorn lacaribena_api.main:app --host 0.0.0.0 --port 8000) & BACK_PID=$$!; \
 	(cd $(FRONTEND) && npm run dev -- --host 0.0.0.0) & FRONT_PID=$$!; \
 	wait
 
