@@ -391,6 +391,14 @@ Neon. `neon deploy` writes the pooled `DATABASE_URL` and the direct
 `DATABASE_URL_UNPOOLED` into `.env`; the app uses the pooled URL and migrations use the
 direct one.
 
+Security requirements for production:
+
+- `DATABASE_URL` must use a scoped `read_write` Neon role, not `neondb_owner`.
+- `DATABASE_URL_UNPOOLED` is the owner/direct URL and is only for migrations.
+- `SECRET_KEY` must be a long random value, not the development default.
+- `CORS_ORIGINS` must list explicit HTTPS origins. Production startup rejects
+  wildcards and non-HTTPS origins.
+
 ```bash
 # First-time schema and login only; no demo catalog is copied from SQLite.
 make migrate-prod

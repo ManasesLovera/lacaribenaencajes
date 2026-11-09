@@ -61,11 +61,28 @@ class Settings(BaseSettings):
 
     @property
     def cors_origin_list(self) -> list[str]:
-        return [
+        origins = [
             origin.strip()
             for origin in self.cors_origins.split(",")
             if origin.strip()
         ]
+        if self.is_production:
+            if not origins:
+                raise RuntimeError(
+                    "CORS_ORIGINS must list at least one HTTPS origin "
+                    "when ENVIRONMENT=production"
+                )
+            invalid = [
+                origin
+                for origin in origins
+                if origin == "*" or not origin.startswith("https://")
+            ]
+            if invalid:
+                raise RuntimeError(
+                    "CORS_ORIGINS must contain only explicit HTTPS origins "
+                    f"when ENVIRONMENT=production: {invalid}"
+                )
+        return origins
 
 
 @lru_cache
