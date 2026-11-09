@@ -50,3 +50,52 @@ def test_protected_route_requires_auth(client: TestClient) -> None:
     assert client.get("/api/products").status_code == 401
     assert client.get("/api/categories").status_code == 401
     assert client.get("/api/orders").status_code == 401
+
+
+def test_change_password(client: TestClient) -> None:
+    login = client.post(
+        "/api/auth/login",
+        json={
+            "email": settings.seed_email,
+            "password": settings.seed_password,
+        },
+    )
+    headers = {"Authorization": f"Bearer {login.json()['access_token']}"}
+
+    wrong = client.post(
+        "/api/auth/change-password",
+        headers=headers,
+        json={
+            "current_password": "incorrecta",
+            "new_password": "nueva-clave-123",
+        },
+    )
+    assert wrong.status_code == 400
+
+    changed = client.post(
+        "/api/auth/change-password",
+        headers=headers,
+        json={
+            "current_password": settings.seed_password,
+            "new_password": "nueva-clave-123",
+        },
+    )
+    assert changed.status_code == 200
+
+    old_login = client.post(
+        "/api/auth/login",
+        json={
+            "email": settings.seed_email,
+            "password": settings.seed_password,
+        },
+    )
+    assert old_login.status_code == 401
+
+    new_login = client.post(
+        "/api/auth/login",
+        json={
+            "email": settings.seed_email,
+            "password": "nueva-clave-123",
+        },
+    )
+    assert new_login.status_code == 200

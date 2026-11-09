@@ -1846,6 +1846,19 @@ button:disabled {
   text-transform: uppercase;
 }
 
+.password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.password-hint {
+  margin: 0;
+  color: var(--ink-400);
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
 .form-error,
 .form-warning {
   margin: 0;

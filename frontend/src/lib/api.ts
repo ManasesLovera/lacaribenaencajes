@@ -151,6 +151,15 @@ export const api = {
   me() {
     return request<ApiUser>('/auth/me')
   },
+  changePassword(currentPassword: string, newPassword: string) {
+    return request<{ status: string; message: string }>('/auth/change-password', {
+      method: 'POST',
+      body: JSON.stringify({
+        current_password: currentPassword,
+        new_password: newPassword,
+      }),
+    })
+  },
   categories() {
     return request<ApiCategory[]>('/categories')
   },

@@ -22,9 +22,11 @@ import {
   UserRound,
 } from 'lucide-preact'
 import { useData } from '../data/DataContext'
+import { api, ApiError } from '../lib/api'
+import { DEMO_MODE } from '../lib/mode'
 import { navigate } from '../lib/router'
 import { Avatar } from '../components/Brand'
-import { Toast } from '../components/ui'
+import { Modal, Toast } from '../components/ui'
 
 const PROFILE_PHONE = '+1 (809) 555-0142'
 
@@ -71,6 +73,14 @@ export function Profile({ onLogout }: { onLogout: () => void }) {
   const [sessions, setSessions] = useState(initialSessions)
   const [toast, setToast] = useState('')
   const [saving, setSaving] = useState(false)
+  const [passwordOpen, setPasswordOpen] = useState(false)
+  const [passwordForm, setPasswordForm] = useState({
+    current: '',
+    next: '',
+    confirm: '',
+  })
+  const [passwordError, setPasswordError] = useState('')
+  const [changingPassword, setChangingPassword] = useState(false)
 
   useEffect(() => {
     setForm({ name: settings.ownerName, email: settings.email })
@@ -98,6 +108,42 @@ export function Profile({ onLogout }: { onLogout: () => void }) {
       )
     } finally {
       setSaving(false)
+    }
+  }
+
+  const changePassword = async (event: Event) => {
+    event.preventDefault()
+    setPasswordError('')
+    if (passwordForm.next.length < 8) {
+      setPasswordError('La nueva contraseña debe tener al menos 8 caracteres.')
+      return
+    }
+    if (passwordForm.next !== passwordForm.confirm) {
+      setPasswordError('La confirmación no coincide con la nueva contraseña.')
+      return
+    }
+    if (passwordForm.current === passwordForm.next) {
+      setPasswordError('La nueva contraseña debe ser diferente a la actual.')
+      return
+    }
+    setChangingPassword(true)
+    try {
+      if (DEMO_MODE) {
+        await new Promise((resolve) => window.setTimeout(resolve, 350))
+      } else {
+        await api.changePassword(passwordForm.current, passwordForm.next)
+      }
+      setPasswordOpen(false)
+      setPasswordForm({ current: '', next: '', confirm: '' })
+      setToast('Contraseña actualizada.')
+    } catch (error) {
+      setPasswordError(
+        error instanceof ApiError
+          ? error.message
+          : 'No se pudo actualizar la contraseña.',
+      )
+    } finally {
+      setChangingPassword(false)
     }
   }
 
@@ -220,7 +266,10 @@ export function Profile({ onLogout }: { onLogout: () => void }) {
                 <button
                   type="button"
                   class="profile-action"
-                  onClick={() => setToast('Te enviaremos un enlace para cambiar la contraseña.')}
+                  onClick={() => {
+                    setPasswordError('')
+                    setPasswordOpen(true)
+                  }}
                 >
                   Cambiar
                 </button>
@@ -394,6 +443,91 @@ export function Profile({ onLogout }: { onLogout: () => void }) {
           </section>
         </aside>
       </div>
+
+      {passwordOpen && (
+        <Modal
+          eyebrow="— SEGURIDAD"
+          title="Cambiar contraseña"
+          onClose={() => setPasswordOpen(false)}
+          footer={
+            <>
+              <button
+                type="button"
+                class="button button--secondary"
+                onClick={() => setPasswordOpen(false)}
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                form="change-password-form"
+                class="button button--primary"
+                disabled={changingPassword}
+              >
+                {changingPassword ? 'Guardando…' : 'Guardar contraseña'}
+              </button>
+            </>
+          }
+        >
+          <form id="change-password-form" class="password-form" onSubmit={changePassword}>
+            <label class="field">
+              <span class="field__label">Contraseña actual</span>
+              <input
+                type="password"
+                autoComplete="current-password"
+                value={passwordForm.current}
+                onInput={(event) =>
+                  setPasswordForm({
+                    ...passwordForm,
+                    current: (event.currentTarget as HTMLInputElement).value,
+                  })
+                }
+                required
+              />
+            </label>
+            <label class="field">
+              <span class="field__label">Nueva contraseña</span>
+              <input
+                type="password"
+                autoComplete="new-password"
+                value={passwordForm.next}
+                onInput={(event) =>
+                  setPasswordForm({
+                    ...passwordForm,
+                    next: (event.currentTarget as HTMLInputElement).value,
+                  })
+                }
+                minLength={8}
+                required
+              />
+            </label>
+            <label class="field">
+              <span class="field__label">Confirmar nueva contraseña</span>
+              <input
+                type="password"
+                autoComplete="new-password"
+                value={passwordForm.confirm}
+                onInput={(event) =>
+                  setPasswordForm({
+                    ...passwordForm,
+                    confirm: (event.currentTarget as HTMLInputElement).value,
+                  })
+                }
+                minLength={8}
+                required
+              />
+            </label>
+            <p class="password-hint">
+              Usa al menos 8 caracteres. La nueva contraseña debe ser diferente a la actual.
+            </p>
+            {passwordError && (
+              <p class="form-error" role="alert">
+                {passwordError}
+              </p>
+            )}
+          </form>
+        </Modal>
+      )}
 
       {toast && <Toast message={toast} onClose={() => setToast('')} />}
     </div>
