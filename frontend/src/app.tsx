@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'preact/hooks'
+import { BootError, BootScreen } from './components/BootScreen'
+import { CatalogSkeleton } from './components/CatalogSkeleton'
 import { Shell } from './components/Shell'
-import { DataProvider } from './data/DataContext'
+import { DataProvider, useData } from './data/DataContext'
 import { api } from './lib/api'
 import {
   clearDemoSession,
@@ -53,6 +55,38 @@ function Page({
   }
 }
 
+function AppBody({
+  path,
+  query,
+  onLogout,
+}: {
+  path: string
+  query: URLSearchParams
+  onLogout: () => void
+}) {
+  const { loading, error, retry } = useData()
+
+  if (error) {
+    return (
+      <BootError
+        message={error}
+        onRetry={() => void retry()}
+        onLogout={onLogout}
+      />
+    )
+  }
+
+  return (
+    <Shell path={path} onLogout={onLogout}>
+      {loading ? (
+        <CatalogSkeleton />
+      ) : (
+        <Page path={path} query={query} onLogout={onLogout} />
+      )}
+    </Shell>
+  )
+}
+
 export function App() {
   const [session, setSession] = useState<Session | null>(() =>
     DEMO_MODE ? loadDemoSession() : null,
@@ -88,12 +122,7 @@ export function App() {
   }, [])
 
   if (checking) {
-    return (
-      <div class="boot">
-        <span class="boot__mark" aria-hidden="true">✦</span>
-        <p>Abriendo el atelier…</p>
-      </div>
-    )
+    return <BootScreen />
   }
 
   if (!session) {
@@ -131,9 +160,11 @@ export function App() {
 
   return (
     <DataProvider onLogout={logout}>
-      <Shell path={route.path} onLogout={logout}>
-        <Page path={route.path} query={route.query} onLogout={logout} />
-      </Shell>
+      <AppBody
+        path={route.path}
+        query={route.query}
+        onLogout={logout}
+      />
     </DataProvider>
   )
 }

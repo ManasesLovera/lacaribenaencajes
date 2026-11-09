@@ -47104,6 +47104,2195 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "BVUhk",
+      "x": 6180,
+      "y": 8382,
+      "name": "Loading Section",
+      "fill": "#00000000",
+      "layout": "vertical",
+      "gap": 8,
+      "children": [
+        {
+          "type": "text",
+          "id": "G8vCI",
+          "name": "Section Eyebrow",
+          "fill": "$wine-700",
+          "content": "SISTEMA · ESTADOS DE CARGA",
+          "fontFamily": "$font-ui",
+          "fontSize": 9.5,
+          "fontWeight": "600",
+          "letterSpacing": 2.2
+        },
+        {
+          "type": "text",
+          "id": "P5v1ax",
+          "name": "Section Title",
+          "fill": "$ink-900",
+          "content": "Estados de carga",
+          "fontFamily": "$font-display",
+          "fontSize": 30,
+          "fontWeight": "500"
+        },
+        {
+          "type": "text",
+          "id": "dXTUo",
+          "name": "Section Subtitle",
+          "fill": "$ink-600",
+          "content": "Splash de marca y esqueletos de contenido para la primera carga de la app.",
+          "fontFamily": "$font-ui",
+          "fontSize": 13,
+          "fontWeight": "normal"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "elJki",
+      "x": 6180,
+      "y": 8520,
+      "name": "Carga inicial — Desktop",
+      "clip": true,
+      "width": 1440,
+      "height": 1024,
+      "fill": "$wine-800",
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "QAkM7",
+          "x": 270,
+          "y": -160,
+          "name": "Glow Blush",
+          "fill": {
+            "type": "gradient",
+            "gradientType": "radial",
+            "enabled": true,
+            "rotation": 0,
+            "size": {
+              "width": 1,
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "#DCA39638",
+                "position": 0
+              },
+              {
+                "color": "#DCA39600",
+                "position": 0.72
+              }
+            ]
+          },
+          "width": 900,
+          "height": 900
+        },
+        {
+          "type": "ellipse",
+          "id": "X2yby",
+          "x": 340,
+          "y": 90,
+          "name": "Ring 1",
+          "fill": "#00000000",
+          "width": 760,
+          "height": 760,
+          "stroke": "#F3CFC514",
+          "strokeWidth": 1
+        },
+        {
+          "type": "ellipse",
+          "id": "uFcMG",
+          "x": 420,
+          "y": 170,
+          "name": "Ring 2",
+          "fill": "#00000000",
+          "width": 600,
+          "height": 600,
+          "stroke": "#F3CFC52E",
+          "strokeWidth": 1
+        },
+        {
+          "type": "ellipse",
+          "id": "Zn9Fr",
+          "x": 494,
+          "y": 244,
+          "name": "Ring 3",
+          "fill": "#00000000",
+          "width": 452,
+          "height": 452,
+          "stroke": "#F3CFC52E",
+          "strokeWidth": 1
+        },
+        {
+          "type": "ellipse",
+          "id": "e0mib",
+          "x": 561,
+          "y": 311,
+          "name": "Ring 4",
+          "fill": "#00000000",
+          "width": 318,
+          "height": 318,
+          "stroke": "#F3CFC52E",
+          "strokeWidth": 1
+        },
+        {
+          "type": "ellipse",
+          "id": "ojrWC",
+          "x": 616,
+          "y": 366,
+          "name": "Ring Core",
+          "fill": "#00000000",
+          "width": 208,
+          "height": 208,
+          "stroke": "#E9B9AE55",
+          "strokeWidth": 1
+        },
+        {
+          "type": "frame",
+          "id": "cfBkB",
+          "x": 602,
+          "y": 422,
+          "name": "Logo Lockup",
+          "width": 236,
+          "height": 96,
+          "fill": "$wine-700",
+          "cornerRadius": "$radius-sm",
+          "layout": "vertical",
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "pesSv",
+              "name": "LA",
+              "fill": "$cream-50",
+              "content": "LA",
+              "fontFamily": "$font-display",
+              "fontSize": 13,
+              "fontWeight": "500",
+              "letterSpacing": 3
+            },
+            {
+              "type": "text",
+              "id": "EXdXL",
+              "name": "Caribeña",
+              "fill": "$blush-200",
+              "content": "Caribeña",
+              "lineHeight": 1,
+              "fontFamily": "$font-script",
+              "fontSize": 32,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "cM7Hs",
+              "name": "ENCAJES",
+              "fill": "$cream-50",
+              "content": "ENCAJES",
+              "fontFamily": "$font-display",
+              "fontSize": 12,
+              "fontWeight": "500",
+              "letterSpacing": 5
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "MQOg0",
+          "x": 560,
+          "y": 584,
+          "name": "Loading Script",
+          "fill": "$blush-200",
+          "textGrowth": "fixed-width",
+          "width": 320,
+          "content": "un momento",
+          "textAlign": "center",
+          "fontFamily": "$font-script",
+          "fontSize": 27,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "frame",
+          "id": "cxU6a",
+          "x": 600,
+          "y": 650,
+          "name": "Progress Track",
+          "width": 240,
+          "height": 2,
+          "fill": "#F3CFC526",
+          "cornerRadius": 999
+        },
+        {
+          "type": "frame",
+          "id": "S9eyCm",
+          "x": 600,
+          "y": 650,
+          "name": "Progress Fill",
+          "width": 148,
+          "height": 2,
+          "fill": "$cream-50",
+          "cornerRadius": 999
+        },
+        {
+          "type": "ellipse",
+          "id": "D0x9rc",
+          "x": 745,
+          "y": 648,
+          "name": "Progress Head",
+          "fill": "$blush-200",
+          "width": 6,
+          "height": 6,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#E9B9AE99",
+            "blur": 10
+          }
+        },
+        {
+          "type": "text",
+          "id": "UJKKG",
+          "x": 570,
+          "y": 672,
+          "name": "Loading Label",
+          "fill": "#E9B9AEB3",
+          "textGrowth": "fixed-width",
+          "width": 300,
+          "content": "PREPARANDO TU CATÁLOGO",
+          "textAlign": "center",
+          "fontFamily": "$font-ui",
+          "fontSize": 9,
+          "fontWeight": "600",
+          "letterSpacing": 2.4
+        },
+        {
+          "type": "text",
+          "id": "i4LBMk",
+          "x": 570,
+          "y": 948,
+          "name": "Location",
+          "fill": "#E9B9AE66",
+          "textGrowth": "fixed-width",
+          "width": 300,
+          "content": "LA CARIBEÑA ENCAJES · NAGUA, RD",
+          "textAlign": "center",
+          "fontFamily": "$font-ui",
+          "fontSize": 8.5,
+          "fontWeight": "500",
+          "letterSpacing": 2
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "j9AZM4",
+      "x": 7700,
+      "y": 8520,
+      "name": "Cargando catálogo — Desktop",
+      "clip": true,
+      "width": 1440,
+      "height": 1072,
+      "fill": "$cream-50",
+      "children": [
+        {
+          "type": "frame",
+          "id": "vtLgz",
+          "name": "Sidebar",
+          "width": 248,
+          "height": 1072,
+          "fill": "$wine-800",
+          "layout": "vertical",
+          "gap": 4,
+          "padding": [
+            24,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "Z7tza",
+              "name": "Logo Block",
+              "width": "fill_container",
+              "height": 96,
+              "fill": "$wine-700",
+              "cornerRadius": "$radius-sm",
+              "layout": "vertical",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "H9ob6",
+                  "name": "LA",
+                  "fill": "$cream-50",
+                  "content": "LA",
+                  "fontFamily": "$font-display",
+                  "fontSize": 13,
+                  "fontWeight": "500",
+                  "letterSpacing": 3
+                },
+                {
+                  "type": "text",
+                  "id": "OlpAB",
+                  "name": "Caribeña",
+                  "fill": "$blush-200",
+                  "content": "Caribeña",
+                  "lineHeight": 1,
+                  "fontFamily": "$font-script",
+                  "fontSize": 32,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "T2Lzfk",
+                  "name": "ENCAJES",
+                  "fill": "$cream-50",
+                  "content": "ENCAJES",
+                  "fontFamily": "$font-display",
+                  "fontSize": 12,
+                  "fontWeight": "500",
+                  "letterSpacing": 5
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "h8OgMe",
+              "name": "Section INVENTARIO",
+              "width": "fill_container",
+              "padding": [
+                24,
+                14,
+                8,
+                14
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "eU0YS",
+                  "name": "Label",
+                  "fill": "#F3CFC599",
+                  "content": "INVENTARIO",
+                  "fontFamily": "$font-ui",
+                  "fontSize": 10,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.5
+                }
+              ]
+            },
+            {
+              "id": "EJzqx",
+              "type": "ref",
+              "ref": "KmN7d",
+              "name": "Nav Resumen",
+              "width": "fill_container",
+              "descendants": {
+                "Yl19M": {
+                  "icon": "layout-dashboard"
+                },
+                "JOzJB": {
+                  "content": "Resumen"
+                }
+              }
+            },
+            {
+              "id": "H4lu0",
+              "type": "ref",
+              "ref": "WzxsW",
+              "name": "Nav Productos",
+              "width": "fill_container",
+              "descendants": {
+                "FVmsP": {
+                  "icon": "shopping-bag"
+                },
+                "V7DuYe": {
+                  "content": "Productos"
+                }
+              }
+            },
+            {
+              "id": "TK65X",
+              "type": "ref",
+              "ref": "KmN7d",
+              "name": "Nav Categorías",
+              "width": "fill_container",
+              "descendants": {
+                "Yl19M": {
+                  "icon": "tags"
+                },
+                "JOzJB": {
+                  "content": "Categorías"
+                }
+              }
+            },
+            {
+              "type": "frame",
+              "id": "kEiUD",
+              "name": "Section TIENDA",
+              "width": "fill_container",
+              "padding": [
+                24,
+                14,
+                8,
+                14
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "IdupW",
+                  "name": "Label",
+                  "fill": "#F3CFC599",
+                  "content": "CUENTA",
+                  "fontFamily": "$font-ui",
+                  "fontSize": 10,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.5
+                }
+              ]
+            },
+            {
+              "id": "Hy8vf",
+              "type": "ref",
+              "ref": "KmN7d",
+              "name": "Nav Ajustes",
+              "width": "fill_container",
+              "descendants": {
+                "Yl19M": {
+                  "icon": "settings"
+                },
+                "JOzJB": {
+                  "content": "Ajustes"
+                }
+              }
+            },
+            {
+              "type": "frame",
+              "id": "goWVa",
+              "name": "Spacer",
+              "width": "fill_container",
+              "height": "fill_container"
+            },
+            {
+              "type": "frame",
+              "id": "Wda9G",
+              "name": "Owner Card",
+              "width": "fill_container",
+              "stroke": "#F3CFC533",
+              "strokeWidth": {
+                "top": 1
+              },
+              "gap": 12,
+              "padding": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "h9A9An",
+                  "name": "Avatar",
+                  "width": 36,
+                  "height": 36,
+                  "fill": "$blush-200",
+                  "cornerRadius": 999,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "DOdms",
+                      "name": "Initials",
+                      "fill": "$wine-800",
+                      "content": "YC",
+                      "fontFamily": "$font-ui",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "RlQ4q",
+                  "name": "Owner Text",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Ir4NR",
+                      "name": "Name",
+                      "fill": "$cream-50",
+                      "content": "Yesenia Castillo",
+                      "fontFamily": "$font-ui",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "mAGZp",
+                      "name": "Logout",
+                      "fill": "#FBF6F1B3",
+                      "content": "Cerrar sesión",
+                      "fontFamily": "$font-ui",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "icon",
+                  "id": "gj5xG",
+                  "name": "Logout Icon",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "log-out",
+                  "library": "lucide",
+                  "fill": "#FBF6F1B3"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "uBtNC",
+          "name": "Main",
+          "width": "fill_container",
+          "height": 1072,
+          "fill": "$cream-50",
+          "layout": "vertical",
+          "children": [
+            {
+              "type": "frame",
+              "id": "a2vxz",
+              "name": "Loading Bar",
+              "width": "fill_container",
+              "height": 2,
+              "fill": "$cream-200",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "l0xEJ",
+                  "name": "Loading Bar Fill",
+                  "width": 452,
+                  "height": 2,
+                  "fill": "$wine-700",
+                  "cornerRadius": 2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ugu4A",
+              "name": "Top Bar",
+              "width": "fill_container",
+              "height": 72,
+              "stroke": "$line",
+              "strokeWidth": {
+                "bottom": 1
+              },
+              "gap": 8,
+              "padding": [
+                0,
+                40
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "H9n3Ge",
+                  "name": "Search",
+                  "width": 420,
+                  "height": 44,
+                  "fill": "$cream-100",
+                  "cornerRadius": "$radius-xs",
+                  "stroke": "$line",
+                  "strokeWidth": 1,
+                  "gap": 10,
+                  "padding": [
+                    0,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "dTBGj",
+                      "name": "Search Icon",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "search",
+                      "library": "lucide",
+                      "fill": "$ink-600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Cmhu6",
+                      "name": "Placeholder",
+                      "fill": "$ink-400",
+                      "content": "Buscar producto…",
+                      "fontFamily": "$font-ui",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Eyjeh",
+                  "name": "Spacer",
+                  "width": "fill_container",
+                  "height": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "RJVT7",
+                  "name": "Ayuda",
+                  "width": 44,
+                  "height": 44,
+                  "cornerRadius": 999,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "EpdVI",
+                      "name": "Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "info",
+                      "library": "lucide",
+                      "fill": "$ink-600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "cv8Uv",
+                  "name": "Notificaciones",
+                  "width": 44,
+                  "height": 44,
+                  "cornerRadius": 999,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "yD9JJ",
+                      "name": "Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "bell",
+                      "library": "lucide",
+                      "fill": "$ink-600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "s5ayhy",
+                  "name": "Avatar",
+                  "width": 36,
+                  "height": 36,
+                  "fill": "$wine-700",
+                  "cornerRadius": 999,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "EIA5y",
+                      "name": "Initials",
+                      "fill": "$cream-50",
+                      "content": "YC",
+                      "fontFamily": "$font-ui",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "pc2Yu",
+              "name": "Content",
+              "width": "fill_container",
+              "fill": "$cream-50",
+              "layout": "vertical",
+              "gap": 24,
+              "padding": [
+                32,
+                40,
+                40,
+                40
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "teh6H",
+                  "name": "Page Header",
+                  "width": "fill_container",
+                  "gap": 24,
+                  "alignItems": "end",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "HUr77",
+                      "name": "Titles",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "ebnoK",
+                          "name": "Eyebrow Skeleton",
+                          "width": 89,
+                          "height": 9,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "p3aSlN",
+                          "name": "Title Skeleton",
+                          "width": 153,
+                          "height": 26,
+                          "fill": "$cream-200",
+                          "cornerRadius": 3
+                        },
+                        {
+                          "type": "frame",
+                          "id": "egG5C",
+                          "name": "Subtitle Skeleton",
+                          "width": 409,
+                          "height": 10,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "GVkqS",
+                      "name": "Spacer",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "dJpgL",
+                      "name": "Actions",
+                      "gap": 10,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "BVhp3",
+                          "name": "Export Skeleton",
+                          "width": 124,
+                          "height": 44,
+                          "fill": "$cream-100",
+                          "cornerRadius": 5,
+                          "stroke": "$line",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "frame",
+                          "id": "w6vaD5",
+                          "name": "Primary Skeleton",
+                          "width": 174,
+                          "height": 44,
+                          "fill": "$blush-100",
+                          "cornerRadius": 5,
+                          "stroke": "$blush-200",
+                          "strokeWidth": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "nei5J",
+                  "name": "Summary Strip",
+                  "width": "fill_container",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "U6f0SR",
+                      "name": "Stat Skeleton A",
+                      "width": "fill_container",
+                      "height": 114,
+                      "fill": "$cream-100",
+                      "cornerRadius": "$radius-sm",
+                      "stroke": "$line",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "rmepD",
+                          "name": "Label",
+                          "width": 96,
+                          "height": 8,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "PXCOB",
+                          "name": "Value",
+                          "width": 132,
+                          "height": 24,
+                          "fill": "$blush-100",
+                          "cornerRadius": 3
+                        },
+                        {
+                          "type": "frame",
+                          "id": "kWZj4",
+                          "name": "Note",
+                          "width": 178,
+                          "height": 8,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "wi0os",
+                      "name": "Stat Skeleton B",
+                      "width": "fill_container",
+                      "height": 114,
+                      "fill": "$cream-100",
+                      "cornerRadius": "$radius-sm",
+                      "stroke": "$line",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Ndfrz",
+                          "name": "Label",
+                          "width": 124,
+                          "height": 8,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "dJvWh",
+                          "name": "Value",
+                          "width": 168,
+                          "height": 24,
+                          "fill": "$blush-100",
+                          "cornerRadius": 3
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Bjzzq",
+                          "name": "Note",
+                          "width": 196,
+                          "height": 8,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "O1lT4d",
+                      "name": "Stat Skeleton C",
+                      "width": "fill_container",
+                      "height": 114,
+                      "fill": "$cream-100",
+                      "cornerRadius": "$radius-sm",
+                      "stroke": "$line",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "ao1bi",
+                          "name": "Label",
+                          "width": 108,
+                          "height": 8,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "A0nh2H",
+                          "name": "Value",
+                          "width": 148,
+                          "height": 24,
+                          "fill": "$blush-100",
+                          "cornerRadius": 3
+                        },
+                        {
+                          "type": "frame",
+                          "id": "s9rFIE",
+                          "name": "Note",
+                          "width": 186,
+                          "height": 8,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "hHFSs",
+                  "name": "Filter Bar",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "J68W8",
+                      "name": "Pill Skeleton",
+                      "width": 94,
+                      "height": 36,
+                      "fill": "$cream-100",
+                      "cornerRadius": 999,
+                      "stroke": "$line",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "VU0VV",
+                      "name": "Pill Skeleton",
+                      "width": 97,
+                      "height": 36,
+                      "fill": "$cream-100",
+                      "cornerRadius": 999,
+                      "stroke": "$line",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "OzE2A",
+                      "name": "Pill Skeleton",
+                      "width": 102,
+                      "height": 36,
+                      "fill": "$cream-100",
+                      "cornerRadius": 999,
+                      "stroke": "$line",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "cDtGZ",
+                      "name": "Pill Skeleton",
+                      "width": 89,
+                      "height": 36,
+                      "fill": "$cream-100",
+                      "cornerRadius": 999,
+                      "stroke": "$line",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "vrS7m",
+                      "name": "Pill Skeleton",
+                      "width": 97,
+                      "height": 36,
+                      "fill": "$cream-100",
+                      "cornerRadius": 999,
+                      "stroke": "$line",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "MevQo",
+                      "name": "Spacer",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "mRmGp",
+                      "name": "Count Skeleton",
+                      "width": 85,
+                      "height": 10,
+                      "fill": "$cream-200",
+                      "cornerRadius": 2
+                    },
+                    {
+                      "type": "frame",
+                      "id": "QuYkF",
+                      "name": "Sort Skeleton",
+                      "width": 135,
+                      "height": 36,
+                      "fill": "$cream-100",
+                      "cornerRadius": 5,
+                      "stroke": "$line",
+                      "strokeWidth": 1
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "QOzta",
+                  "name": "Table",
+                  "clip": true,
+                  "width": "fill_container",
+                  "fill": "$cream-50",
+                  "cornerRadius": "$radius-sm",
+                  "stroke": "$line",
+                  "strokeWidth": 1,
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "id": "U0Lhr",
+                      "type": "ref",
+                      "ref": "tOjJR",
+                      "name": "Table Header",
+                      "width": "fill_container"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "cW44a",
+                      "name": "Skeleton Row 1",
+                      "width": "fill_container",
+                      "height": 64,
+                      "fill": "$cream-50",
+                      "stroke": "$line",
+                      "strokeWidth": {
+                        "bottom": 1
+                      },
+                      "gap": 16,
+                      "padding": [
+                        0,
+                        20
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "LNfww",
+                          "name": "Thumb",
+                          "width": 44,
+                          "height": 44,
+                          "fill": "$blush-100",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "jRcaa",
+                          "name": "Name",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "MzhcT",
+                              "name": "Name Line",
+                              "width": 180,
+                              "height": 12,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            },
+                            {
+                              "type": "frame",
+                              "id": "YXfsE",
+                              "name": "Sub Line",
+                              "width": 88,
+                              "height": 8,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "R0Xsc",
+                          "name": "Spacer",
+                          "width": "fill_container",
+                          "height": 1
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Oso7m",
+                          "name": "Chip",
+                          "width": 78,
+                          "height": 25,
+                          "fill": "$cream-100",
+                          "cornerRadius": 999,
+                          "stroke": "$line",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "frame",
+                          "id": "KojoP",
+                          "name": "Price",
+                          "width": 72,
+                          "height": 12,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "GCrwX",
+                          "name": "Cost",
+                          "width": 66,
+                          "height": 12,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "N9yxC",
+                          "name": "Net",
+                          "layout": "vertical",
+                          "gap": 5,
+                          "alignItems": "end",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "BCbTn",
+                              "name": "Net Pill",
+                              "width": 100,
+                              "height": 27,
+                              "fill": "$blush-100",
+                              "cornerRadius": 4
+                            },
+                            {
+                              "type": "frame",
+                              "id": "NYPsy",
+                              "name": "Margin",
+                              "width": 56,
+                              "height": 7,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "krT23",
+                      "name": "Skeleton Row 2",
+                      "width": "fill_container",
+                      "height": 64,
+                      "fill": "$cream-50",
+                      "stroke": "$line",
+                      "strokeWidth": {
+                        "bottom": 1
+                      },
+                      "gap": 16,
+                      "padding": [
+                        0,
+                        20
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "c8amB",
+                          "name": "Thumb",
+                          "width": 44,
+                          "height": 44,
+                          "fill": "$blush-100",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "l6olFe",
+                          "name": "Name",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "U24qF",
+                              "name": "Name Line",
+                              "width": 180,
+                              "height": 12,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            },
+                            {
+                              "type": "frame",
+                              "id": "j5IEn",
+                              "name": "Sub Line",
+                              "width": 88,
+                              "height": 8,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "kXfgk",
+                          "name": "Spacer",
+                          "width": "fill_container",
+                          "height": 1
+                        },
+                        {
+                          "type": "frame",
+                          "id": "DreYS",
+                          "name": "Chip",
+                          "width": 78,
+                          "height": 25,
+                          "fill": "$cream-100",
+                          "cornerRadius": 999,
+                          "stroke": "$line",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ItDSt",
+                          "name": "Price",
+                          "width": 72,
+                          "height": 12,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "kPemo",
+                          "name": "Cost",
+                          "width": 66,
+                          "height": 12,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "FH1Yx",
+                          "name": "Net",
+                          "layout": "vertical",
+                          "gap": 5,
+                          "alignItems": "end",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "D1ZYX",
+                              "name": "Net Pill",
+                              "width": 100,
+                              "height": 27,
+                              "fill": "$blush-100",
+                              "cornerRadius": 4
+                            },
+                            {
+                              "type": "frame",
+                              "id": "lCRaI",
+                              "name": "Margin",
+                              "width": 56,
+                              "height": 7,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "p8AfK",
+                      "name": "Skeleton Row 3",
+                      "width": "fill_container",
+                      "height": 64,
+                      "fill": "$cream-50",
+                      "stroke": "$line",
+                      "strokeWidth": {
+                        "bottom": 1
+                      },
+                      "gap": 16,
+                      "padding": [
+                        0,
+                        20
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "f7p4nA",
+                          "name": "Thumb",
+                          "width": 44,
+                          "height": 44,
+                          "fill": "$blush-100",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "d6Y0i",
+                          "name": "Name",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "qKM20",
+                              "name": "Name Line",
+                              "width": 180,
+                              "height": 12,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            },
+                            {
+                              "type": "frame",
+                              "id": "VX7yL",
+                              "name": "Sub Line",
+                              "width": 88,
+                              "height": 8,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "x1VuK",
+                          "name": "Spacer",
+                          "width": "fill_container",
+                          "height": 1
+                        },
+                        {
+                          "type": "frame",
+                          "id": "b6YW0Z",
+                          "name": "Chip",
+                          "width": 78,
+                          "height": 25,
+                          "fill": "$cream-100",
+                          "cornerRadius": 999,
+                          "stroke": "$line",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "frame",
+                          "id": "dM9n7",
+                          "name": "Price",
+                          "width": 72,
+                          "height": 12,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Y4JGL",
+                          "name": "Cost",
+                          "width": 66,
+                          "height": 12,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "f1f0D",
+                          "name": "Net",
+                          "layout": "vertical",
+                          "gap": 5,
+                          "alignItems": "end",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "ucW4C",
+                              "name": "Net Pill",
+                              "width": 100,
+                              "height": 27,
+                              "fill": "$blush-100",
+                              "cornerRadius": 4
+                            },
+                            {
+                              "type": "frame",
+                              "id": "gwPfb",
+                              "name": "Margin",
+                              "width": 56,
+                              "height": 7,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "IFTNg",
+                      "name": "Skeleton Row 4",
+                      "width": "fill_container",
+                      "height": 64,
+                      "fill": "$cream-50",
+                      "stroke": "$line",
+                      "strokeWidth": {
+                        "bottom": 1
+                      },
+                      "gap": 16,
+                      "padding": [
+                        0,
+                        20
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "iJZSt",
+                          "name": "Thumb",
+                          "width": 44,
+                          "height": 44,
+                          "fill": "$blush-100",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "i5XorV",
+                          "name": "Name",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "btz2R",
+                              "name": "Name Line",
+                              "width": 180,
+                              "height": 12,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            },
+                            {
+                              "type": "frame",
+                              "id": "QlI8O",
+                              "name": "Sub Line",
+                              "width": 88,
+                              "height": 8,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "OOHtM",
+                          "name": "Spacer",
+                          "width": "fill_container",
+                          "height": 1
+                        },
+                        {
+                          "type": "frame",
+                          "id": "C1DBc",
+                          "name": "Chip",
+                          "width": 78,
+                          "height": 25,
+                          "fill": "$cream-100",
+                          "cornerRadius": 999,
+                          "stroke": "$line",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "frame",
+                          "id": "d0i7l",
+                          "name": "Price",
+                          "width": 72,
+                          "height": 12,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "UeMzB",
+                          "name": "Cost",
+                          "width": 66,
+                          "height": 12,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "muyoO",
+                          "name": "Net",
+                          "layout": "vertical",
+                          "gap": 5,
+                          "alignItems": "end",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "yFzxb",
+                              "name": "Net Pill",
+                              "width": 100,
+                              "height": 27,
+                              "fill": "$blush-100",
+                              "cornerRadius": 4
+                            },
+                            {
+                              "type": "frame",
+                              "id": "pB0IV",
+                              "name": "Margin",
+                              "width": 56,
+                              "height": 7,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "hLJ37",
+                      "name": "Skeleton Row 5",
+                      "width": "fill_container",
+                      "height": 64,
+                      "fill": "$cream-50",
+                      "stroke": "$line",
+                      "strokeWidth": {
+                        "bottom": 1
+                      },
+                      "gap": 16,
+                      "padding": [
+                        0,
+                        20
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "uG13n",
+                          "name": "Thumb",
+                          "width": 44,
+                          "height": 44,
+                          "fill": "$blush-100",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "S9msg",
+                          "name": "Name",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "AdJLe",
+                              "name": "Name Line",
+                              "width": 180,
+                              "height": 12,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            },
+                            {
+                              "type": "frame",
+                              "id": "gLEdk",
+                              "name": "Sub Line",
+                              "width": 88,
+                              "height": 8,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "tyOiC",
+                          "name": "Spacer",
+                          "width": "fill_container",
+                          "height": 1
+                        },
+                        {
+                          "type": "frame",
+                          "id": "KiCDx",
+                          "name": "Chip",
+                          "width": 78,
+                          "height": 25,
+                          "fill": "$cream-100",
+                          "cornerRadius": 999,
+                          "stroke": "$line",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "frame",
+                          "id": "HAQO6",
+                          "name": "Price",
+                          "width": 72,
+                          "height": 12,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ob8Du",
+                          "name": "Cost",
+                          "width": 66,
+                          "height": 12,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "F6NaP",
+                          "name": "Net",
+                          "layout": "vertical",
+                          "gap": 5,
+                          "alignItems": "end",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "aHQvV",
+                              "name": "Net Pill",
+                              "width": 100,
+                              "height": 27,
+                              "fill": "$blush-100",
+                              "cornerRadius": 4
+                            },
+                            {
+                              "type": "frame",
+                              "id": "mneJc",
+                              "name": "Margin",
+                              "width": 56,
+                              "height": 7,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "mRji5",
+                      "name": "Skeleton Row 6",
+                      "width": "fill_container",
+                      "height": 64,
+                      "fill": "$cream-50",
+                      "stroke": "$line",
+                      "strokeWidth": {
+                        "bottom": 1
+                      },
+                      "gap": 16,
+                      "padding": [
+                        0,
+                        20
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "J6R7gX",
+                          "name": "Thumb",
+                          "width": 44,
+                          "height": 44,
+                          "fill": "$blush-100",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Rx6Y6",
+                          "name": "Name",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "o5lKi",
+                              "name": "Name Line",
+                              "width": 180,
+                              "height": 12,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            },
+                            {
+                              "type": "frame",
+                              "id": "ZHabR",
+                              "name": "Sub Line",
+                              "width": 88,
+                              "height": 8,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Zbjfn",
+                          "name": "Spacer",
+                          "width": "fill_container",
+                          "height": 1
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ROtcm",
+                          "name": "Chip",
+                          "width": 78,
+                          "height": 25,
+                          "fill": "$cream-100",
+                          "cornerRadius": 999,
+                          "stroke": "$line",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "frame",
+                          "id": "IXWPL",
+                          "name": "Price",
+                          "width": 72,
+                          "height": 12,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ffghr",
+                          "name": "Cost",
+                          "width": 66,
+                          "height": 12,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "O5lEN",
+                          "name": "Net",
+                          "layout": "vertical",
+                          "gap": 5,
+                          "alignItems": "end",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "pqgcr",
+                              "name": "Net Pill",
+                              "width": 100,
+                              "height": 27,
+                              "fill": "$blush-100",
+                              "cornerRadius": 4
+                            },
+                            {
+                              "type": "frame",
+                              "id": "aF0VX",
+                              "name": "Margin",
+                              "width": 56,
+                              "height": 7,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "UW3D4",
+                      "name": "Skeleton Row 7",
+                      "width": "fill_container",
+                      "height": 64,
+                      "fill": "$cream-50",
+                      "stroke": "$line",
+                      "strokeWidth": {
+                        "bottom": 1
+                      },
+                      "gap": 16,
+                      "padding": [
+                        0,
+                        20
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "N4wBix",
+                          "name": "Thumb",
+                          "width": 44,
+                          "height": 44,
+                          "fill": "$blush-100",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "k7sln6",
+                          "name": "Name",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "CzBPB",
+                              "name": "Name Line",
+                              "width": 180,
+                              "height": 12,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            },
+                            {
+                              "type": "frame",
+                              "id": "AaDJ4",
+                              "name": "Sub Line",
+                              "width": 88,
+                              "height": 8,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "fNoJe",
+                          "name": "Spacer",
+                          "width": "fill_container",
+                          "height": 1
+                        },
+                        {
+                          "type": "frame",
+                          "id": "c6u3PN",
+                          "name": "Chip",
+                          "width": 78,
+                          "height": 25,
+                          "fill": "$cream-100",
+                          "cornerRadius": 999,
+                          "stroke": "$line",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Q68eIJ",
+                          "name": "Price",
+                          "width": 72,
+                          "height": 12,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "rO63G",
+                          "name": "Cost",
+                          "width": 66,
+                          "height": 12,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "iBxPr",
+                          "name": "Net",
+                          "layout": "vertical",
+                          "gap": 5,
+                          "alignItems": "end",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "uCqAJ",
+                              "name": "Net Pill",
+                              "width": 100,
+                              "height": 27,
+                              "fill": "$blush-100",
+                              "cornerRadius": 4
+                            },
+                            {
+                              "type": "frame",
+                              "id": "j6bo5",
+                              "name": "Margin",
+                              "width": 56,
+                              "height": 7,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "L5YeRm",
+                      "name": "Skeleton Row 8",
+                      "width": "fill_container",
+                      "height": 64,
+                      "fill": "$cream-50",
+                      "stroke": "$line",
+                      "strokeWidth": {
+                        "bottom": 1
+                      },
+                      "gap": 16,
+                      "padding": [
+                        0,
+                        20
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "fD6Iq",
+                          "name": "Thumb",
+                          "width": 44,
+                          "height": 44,
+                          "fill": "$blush-100",
+                          "cornerRadius": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "F0fW8",
+                          "name": "Name",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "Xunw3",
+                              "name": "Name Line",
+                              "width": 180,
+                              "height": 12,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            },
+                            {
+                              "type": "frame",
+                              "id": "IUgI3",
+                              "name": "Sub Line",
+                              "width": 88,
+                              "height": 8,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "q8nP2e",
+                          "name": "Spacer",
+                          "width": "fill_container",
+                          "height": 1
+                        },
+                        {
+                          "type": "frame",
+                          "id": "L88qN",
+                          "name": "Chip",
+                          "width": 78,
+                          "height": 25,
+                          "fill": "$cream-100",
+                          "cornerRadius": 999,
+                          "stroke": "$line",
+                          "strokeWidth": 1
+                        },
+                        {
+                          "type": "frame",
+                          "id": "d6enop",
+                          "name": "Price",
+                          "width": 72,
+                          "height": 12,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "MM0eY",
+                          "name": "Cost",
+                          "width": 66,
+                          "height": 12,
+                          "fill": "$cream-200",
+                          "cornerRadius": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "lxQ7q",
+                          "name": "Net",
+                          "layout": "vertical",
+                          "gap": 5,
+                          "alignItems": "end",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "W9wFX",
+                              "name": "Net Pill",
+                              "width": 100,
+                              "height": 27,
+                              "fill": "$blush-100",
+                              "cornerRadius": 4
+                            },
+                            {
+                              "type": "frame",
+                              "id": "I6hTi",
+                              "name": "Margin",
+                              "width": 56,
+                              "height": 7,
+                              "fill": "$cream-200",
+                              "cornerRadius": 2
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "JXynP",
+                  "name": "Pagination",
+                  "width": "fill_container",
+                  "height": 44,
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Ri3zA",
+                      "name": "Showing Skeleton",
+                      "width": 150,
+                      "height": 10,
+                      "fill": "$cream-200",
+                      "cornerRadius": 2
+                    },
+                    {
+                      "type": "frame",
+                      "id": "wmab4",
+                      "name": "Spacer",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ni4Bx",
+                      "name": "Page Skeleton 1",
+                      "width": 30,
+                      "height": 30,
+                      "fill": "$blush-100",
+                      "cornerRadius": 4,
+                      "stroke": "$line",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ZK9IO",
+                      "name": "Page Skeleton 2",
+                      "width": 30,
+                      "height": 30,
+                      "fill": "$cream-100",
+                      "cornerRadius": 4,
+                      "stroke": "$line",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "p5awpo",
+                      "name": "Page Skeleton 3",
+                      "width": 30,
+                      "height": 30,
+                      "fill": "$cream-100",
+                      "cornerRadius": 4,
+                      "stroke": "$line",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ijWkV",
+                      "name": "Page Skeleton 4",
+                      "width": 30,
+                      "height": 30,
+                      "fill": "$cream-100",
+                      "cornerRadius": 4,
+                      "stroke": "$line",
+                      "strokeWidth": 1
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "JgWCO",
+      "x": 6180,
+      "y": 9800,
+      "name": "TEST LAYOUT",
+      "width": 400,
+      "height": 300,
+      "fill": "#FFFFFF",
+      "children": [
+        {
+          "type": "frame",
+          "id": "b3SMQ",
+          "name": "Left",
+          "width": 100,
+          "height": 300,
+          "fill": "#FF0000"
+        },
+        {
+          "type": "frame",
+          "id": "xVxKU",
+          "name": "Right",
+          "width": "fill_container",
+          "height": "fill_container",
+          "fill": "#00FF00",
+          "layout": "vertical",
+          "children": [
+            {
+              "type": "frame",
+              "id": "KOtfF",
+              "name": "Inner",
+              "width": "fill_container",
+              "height": 100,
+              "fill": "#0000FF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "vAmOG",
+      "x": 6600,
+      "y": 0,
+      "name": "TEST NONE",
+      "width": 200,
+      "height": 200,
+      "fill": "#EEEEEE",
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "C9LSlg",
+          "x": 10,
+          "y": 20,
+          "name": "Absolute Child",
+          "width": 50,
+          "height": 50,
+          "fill": "#FF0000"
+        },
+        {
+          "type": "rectangle",
+          "id": "YMFZM",
+          "x": 10,
+          "y": 0,
+          "name": "Rect Child",
+          "fill": "#00AA00",
+          "width": 50,
+          "height": 50
+        },
+        {
+          "type": "ellipse",
+          "id": "hjtjW",
+          "x": 80,
+          "y": 0,
+          "name": "Ellipse Child",
+          "fill": "#0000AA",
+          "width": 50,
+          "height": 50
+        },
+        {
+          "type": "text",
+          "id": "IrDBw",
+          "x": 150,
+          "y": 0,
+          "name": "Text Child",
+          "fill": "#000000",
+          "content": "Hi",
+          "fontFamily": "Inter",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        }
+      ]
     }
   ],
   "variables": {

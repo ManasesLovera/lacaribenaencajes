@@ -32,6 +32,9 @@ type DataValue = {
   orders: Order[]
   tasks: Task[]
   settings: Settings
+  loading: boolean
+  error: string
+  retry: () => Promise<void>
   saveProduct: (product: Product) => Promise<void>
   deleteProduct: (id: string) => Promise<void>
   restoreProduct: (product: Product) => Promise<void>
@@ -124,13 +127,7 @@ const emptySettings: Settings = {
   emailSummary: true,
 }
 
-function ApiDataProvider({
-  children,
-  onLogout,
-}: {
-  children: ComponentChildren
-  onLogout: () => void
-}) {
+function ApiDataProvider({ children }: { children: ComponentChildren }) {
   const [products, setProducts] = useState<Product[]>([])
   const [categories, setCategories] = useState<Category[]>([])
   const [orders, setOrders] = useState<Order[]>([])
@@ -158,6 +155,7 @@ function ApiDataProvider({
 
   const load = useCallback(async () => {
     setLoading(true)
+    setError('')
     try {
       await refresh()
     } catch (err) {
@@ -179,6 +177,9 @@ function ApiDataProvider({
     orders,
     tasks,
     settings,
+    loading,
+    error,
+    retry: load,
     saveProduct: async (product) => {
       const existing = products.find((item) => item.id === product.id)
       const payload = {
@@ -268,33 +269,6 @@ function ApiDataProvider({
     },
   }
 
-  if (loading) {
-    return (
-      <div class="boot">
-        <span class="boot__mark" aria-hidden="true">✦</span>
-        <p>Cargando la tienda…</p>
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div class="boot">
-        <span class="boot__mark" aria-hidden="true">✦</span>
-        <h1 class="display-md">No se pudo cargar la tienda</h1>
-        <p>{error}</p>
-        <div class="boot__actions">
-          <button type="button" class="button button--primary" onClick={() => void load()}>
-            Reintentar
-          </button>
-          <button type="button" class="button button--secondary" onClick={onLogout}>
-            Iniciar sesión de nuevo
-          </button>
-        </div>
-      </div>
-    )
-  }
-
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>
 }
 
@@ -356,6 +330,9 @@ function DemoDataProvider({
     orders,
     tasks,
     settings,
+    loading: false,
+    error: '',
+    retry: async () => {},
     saveProduct: async (product) => {
       setProducts((current) => {
         const exists = current.some((item) => item.id === product.id)
@@ -463,7 +440,7 @@ export function DataProvider({
   return DEMO_MODE ? (
     <DemoDataProvider onLogout={onLogout}>{children}</DemoDataProvider>
   ) : (
-    <ApiDataProvider onLogout={onLogout}>{children}</ApiDataProvider>
+    <ApiDataProvider>{children}</ApiDataProvider>
   )
 }
 
